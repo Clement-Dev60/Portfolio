@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8" />
@@ -12,26 +12,27 @@
 <body>
   <header class="header">
     <div class="profil">
-      <img class="icone" src="assets/images/c1z7t7e.PNG" alt="">
+      <img class="icone" src="assets/images/c1z7t7e.PNG" alt="Photo de profil de Clément Humez">
       <div class="logo">Clément Humez</div>
     </div>
     <div class="logo" data-fr="Développeur Junior" data-en="Junior Developer">Développeur Junior</div>
     <nav>
-      <button id="darkModeToggle"></button>
-      <a class="location" href="#" data-fr="ACCUEIL" data-en="HOME">ACCUEIL</a>
-      <a class="location" href="#" data-fr="À PROPOS" data-en="ABOUT">À PROPOS</a>
-      <a class="location" href="#" data-fr="PROJETS" data-en="PROJECTS">PROJETS</a>
-      <a class="location" href="#" data-fr="CONTACT" data-en="CONTACT">CONTACT</a>
+      <button id="darkModeToggle" aria-label="Activer le mode sombre"></button>
+      <a class="location" href="#Accueil" data-fr="ACCUEIL" data-en="HOME">ACCUEIL</a>
+      <a class="location" href="#À_propos" data-fr="À PROPOS" data-en="ABOUT">À PROPOS</a>
+      <a class="location" href="#Projets" data-fr="PROJETS" data-en="PROJECTS">PROJETS</a>
+      <a class="location" href="#Contact" data-fr="CONTACT" data-en="CONTACT">CONTACT</a>
     </nav>
   </header>
 
   <div class="social-bar">
     <a href="https://www.linkedin.com/in/cl%C3%A9ment-humez-54962533a/" target="_blank"><img
-        src="assets/images/linkedin.svg" alt=""></a>
-    <a href="https://github.com/Clement-Dev60" target="_blank"><img src="assets/images/github.svg" alt=""></a>
+        src="assets/images/linkedin.svg" alt="Profil LinkedIn de Clément Humez"></a>
+    <a href="https://github.com/Clement-Dev60" target="_blank"><img src="assets/images/github.svg"
+        alt="Profil GitHub de Clément Humez"></a>
   </div>
   <div class="english">
-    <button id="langToggle"></button>
+    <button id="langToggle" aria-label="Changer la langue"></button>
   </div>
 
   <section class="hero">
@@ -45,10 +46,11 @@
     </div>
   </footer>
 
-  <div class="cookie-popup" id="cookiePopup">
+  <div class="cookie-popup" id="cookiePopup" role="dialog" aria-labelledby="cookieTitle" aria-describedby="cookieDesc">
     <div class="cookie-icon">🍪</div>
     <div class="cookie-content">
-      <p>Ce site utilise des cookies pour assurer son bon fonctionnement et améliorer votre expérience.</p>
+      <p id="cookieDesc">Ce site utilise des cookies pour assurer son bon fonctionnement et améliorer votre expérience.
+      </p>
     </div>
     <button class="close-btn" id="closeBtn" aria-label="Fermer">&times;</button>
   </div>
