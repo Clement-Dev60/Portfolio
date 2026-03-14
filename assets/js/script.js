@@ -76,6 +76,13 @@ function translatePage() {
     document.querySelectorAll("[data-fr]").forEach(el => {
         el.textContent = el.dataset[currentLang];
     });
+
+    const contactTitle = document.getElementById('contactTitle');
+    if (contactTitle) {
+        contactTitle.innerHTML = currentLang === "en"
+            ? "Let's work<br><span>together.</span>"
+            : "Travaillons<br><span>ensemble.</span>";
+    }
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -166,4 +173,41 @@ setTimeout(() => {
     toggle.classList.add('visible');
 }, 3100);
 
+const burgerBtn = document.getElementById('burgerBtn');
+const navDrawer = document.getElementById('navDrawer');
+const darkMobileBtn = document.getElementById('darkModeToggleMobile');
+const langMobileBtn = document.getElementById('langToggleMobile');
 
+burgerBtn.addEventListener('click', () => {
+    burgerBtn.classList.toggle('open');
+    navDrawer.classList.toggle('open');
+});
+
+navDrawer.querySelectorAll('.nav-drawer-link').forEach(link => {
+    link.addEventListener('click', () => {
+        burgerBtn.classList.remove('open');
+        navDrawer.classList.remove('open');
+    });
+});
+
+darkMobileBtn.addEventListener('click', () => toggle.click());
+langMobileBtn.addEventListener('click', () => langToggle.click());
+
+function updateMobileButtons() {
+    darkMobileBtn.innerHTML = toggle.innerHTML;
+    langMobileBtn.textContent = langToggle.textContent;
+}
+
+const _origUpdateDark = updateDarkModeText;
+updateDarkModeText = function () {
+    _origUpdateDark();
+    updateMobileButtons();
+};
+
+const _origUpdateLang = updateLangButton;
+updateLangButton = function () {
+    _origUpdateLang();
+    updateMobileButtons();
+};
+
+updateMobileButtons();

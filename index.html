@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="assets/css/pages/index.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap"
     rel="stylesheet" />
@@ -23,24 +26,183 @@
     <div class="logo" data-fr="Développeur Junior" data-en="Junior Developer">Développeur Junior</div>
     <nav>
       <button id="darkModeToggle" aria-label="Activer le mode sombre"></button>
-      <a class="location" href="#Accueil" data-fr="ACCUEIL" data-en="HOME">ACCUEIL</a>
       <a class="location" href="#À_propos" data-fr="À PROPOS" data-en="ABOUT">À PROPOS</a>
       <a class="location" href="#Projets" data-fr="PROJETS" data-en="PROJECTS">PROJETS</a>
       <a class="location" href="#Contact" data-fr="CONTACT" data-en="CONTACT">CONTACT</a>
+      <button class="burger-btn" id="burgerBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
   </header>
 
+  <div class="nav-drawer" id="navDrawer">
+    <div class="nav-drawer-inner">
+      <a class="nav-drawer-link" href="#À_propos" data-fr="À propos" data-en="About">À propos <span
+          class="arrow">→</span></a>
+      <a class="nav-drawer-link" href="#Projets" data-fr="Projets" data-en="Projects">Projets <span
+          class="arrow">→</span></a>
+      <a class="nav-drawer-link" href="#Contact" data-fr="Contact" data-en="Contact">Contact <span
+          class="arrow">→</span></a>
+    </div>
+    <div class="nav-drawer-footer">
+      <button id="darkModeToggleMobile"></button>
+      <button id="langToggleMobile"></button>
+    </div>
+  </div>
+
   <div class="social-bar">
-    <a href="https://www.linkedin.com/in/cl%C3%A9ment-humez-54962533a/" target="_blank"><img
-        src="assets/images/linkedin.svg" alt="Profil LinkedIn de Clément Humez"></a>
-    <a href="https://github.com/Clement-Dev60" target="_blank"><img src="assets/images/github.svg"
-        alt="Profil GitHub de Clément Humez"></a>
+    <a href="https://www.linkedin.com/in/cl%C3%A9ment-humez-54962533a/" target="_blank"><ion-icon
+        name="logo-linkedin"></ion-icon></a>
+    <a href="https://github.com/Clement-Dev60" target="_blank"><ion-icon name="logo-github"></ion-icon></a>
   </div>
   <div class="english">
     <button id="langToggle" aria-label="Changer la langue"></button>
   </div>
 
   <section class="hero" id="Accueil">
+    <!-- ===================== SECTION ABOUT ===================== -->
+    <section class="about-section" id="À_propos">
+
+      <!-- GAUCHE -->
+      <div class="about-left">
+
+        <div>
+          <div class="about-photo-wrap">
+            <img class="about-photo" src="assets/images/c1z7t7e.PNG" alt="Photo de Clément Humez" />
+            <span class="about-status"></span>
+          </div>
+        </div>
+
+        <div>
+          <div class="about-badge">
+            <span class="about-badge-dot"></span>
+            <span data-fr="Recherche alternance / stage" data-en="Looking for apprenticeship / internship">Recherche
+              alternance / stage</span>
+          </div>
+          <h2 class="about-name">Clément<br>Humez</h2>
+          <p class="about-title-line" data-fr="Développeur Junior" data-en="Junior Developer">Développeur Junior</p>
+          <p class="about-location">
+            <ion-icon name="location-outline"></ion-icon>
+            France
+          </p>
+        </div>
+
+        <div>
+          <p class="about-label" data-fr="Back-end & Frameworks" data-en="Back-end & Frameworks">Back-end & Frameworks
+          </p>
+          <div class="about-chips">
+            <span class="about-chip b">Python</span>
+            <span class="about-chip b">PHP</span>
+            <span class="about-chip b">Java</span>
+            <span class="about-chip b">Ruby</span>
+            <span class="about-chip b">Symfony</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="about-label" data-fr="Front-end" data-en="Front-end">Front-end</p>
+          <div class="about-chips">
+            <span class="about-chip">HTML/CSS</span>
+            <span class="about-chip">SCSS</span>
+            <span class="about-chip">JavaScript</span>
+            <span class="about-chip r">React</span>
+            <span class="about-chip r">Tailwind</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="about-label" data-fr="Intérêts" data-en="Interests">Intérêts</p>
+          <div class="about-chips">
+            <span class="about-chip sec">Cybersécurité</span>
+            <span class="about-chip sec">CTF</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- DROITE -->
+      <div class="about-right">
+
+        <div>
+          <p class="about-label" data-fr="À propos" data-en="About">À propos</p>
+          <p class="about-bio"
+            data-fr="Développeur junior full-stack avec une bonne maîtrise des environnements front et back. À l'aise sur plusieurs langages — de JavaScript à Python en passant par Java et PHP/Symfony — j'aime construire des applications robustes autant que des interfaces propres. Passionné par la cybersécurité, je m'intéresse activement aux logiques d'attaque et de défense, et cherche à approfondir ce domaine dans le cadre d'une alternance ou d'un stage."
+            data-en="Junior full-stack developer comfortable in both front-end and back-end environments. At ease with multiple languages — from JavaScript to Python, Java and PHP/Symfony — I enjoy building robust applications as much as clean interfaces. Passionate about cybersecurity, I actively explore offensive and defensive concepts, and am looking to deepen this field through an apprenticeship or internship.">
+            Développeur junior <strong>full-stack</strong> avec une bonne maîtrise des environnements front et back.
+            À l'aise sur plusieurs langages — de <strong>JavaScript</strong> à <strong>Python</strong> en passant par
+            <strong>Java</strong> et <strong>PHP/Symfony</strong> — j'aime construire des applications robustes autant
+            que des interfaces propres.<br><br>
+            Passionné par la <strong>cybersécurité</strong>, je m'intéresse activement aux logiques d'attaque et de
+            défense, et cherche à approfondir ce domaine dans le cadre d'une <strong>alternance ou d'un stage</strong>.
+          </p>
+        </div>
+
+        <div>
+          <p class="about-label" data-fr="En chiffres" data-en="By the numbers">En chiffres</p>
+          <div class="about-stats">
+            <div class="about-stat">
+              <div class="about-stat-n y">3+</div>
+              <div class="about-stat-l" data-fr="Projets" data-en="Projects">Projets</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-n b">9</div>
+              <div class="about-stat-l" data-fr="Langages" data-en="Languages">Langages</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-n r">2</div>
+              <div class="about-stat-l" data-fr="Frameworks" data-en="Frameworks">Frameworks</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="about-label" data-fr="Centres d'intérêt" data-en="Interests">Centres d'intérêt</p>
+          <div class="about-interests">
+
+            <div class="about-irow">
+              <div class="about-iicon r">
+                <ion-icon name="shield-half-outline"></ion-icon>
+              </div>
+              <div class="about-itext">
+                <strong data-fr="Cybersécurité & CTF" data-en="Cybersecurity & CTF">Cybersécurité & CTF</strong>
+                <span data-fr="Challenges offensifs, sécurité web, exploration des vulnérabilités"
+                  data-en="Offensive challenges, web security, vulnerability exploration">
+                </span>
+              </div>
+            </div>
+
+            <div class="about-irow">
+              <div class="about-iicon y">
+                <ion-icon name="game-controller-outline"></ion-icon>
+              </div>
+              <div class="about-itext">
+                <strong data-fr="Jeux-Vidéos" data-en="Video Games">Jeux-Vidéos</strong>
+                <span data-fr="Fan de game design, mécaniques et univers narratifs"
+                  data-en="Fan of game design, mechanics and narrative universes">
+                </span>
+              </div>
+            </div>
+
+            <div class="about-irow">
+              <div class="about-iicon b">
+                <ion-icon name="construct-outline"></ion-icon>
+              </div>
+              <div class="about-itext">
+                <strong data-fr="Dev & Architecture" data-en="Dev & Architecture">Dev & Architecture</strong>
+                <span data-fr="Back-end/Front-end, code maintenable, bonnes pratiques"
+                  data-en="Back-end/Front-end, maintainable code, best practices">
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+    <br>
+    <br>
     <!-- ===================== SECTION PROJETS ===================== -->
     <section class="projects-section" id="Projets">
       <div class="projects-header">
@@ -127,9 +289,7 @@
           <div class="card__body">
             <p class="card__category" data-fr="App desktop" data-en="Desktop App">App desktop</p>
             <h3 class="card__title" data-fr="Jeu 2048" data-en="2048 game"></h3>
-            <p class="card__desc"
-              data-fr="Jeu 2048 version web uniquement"
-              data-en="Game 2048 web version only">
+            <p class="card__desc" data-fr="Jeu 2048 version web uniquement" data-en="Game 2048 web version only">
             </p>
             <a target="_blank" href="https://two048-bwj4.onrender.com/" class="card__cta" data-fr-text="Voir le projet"
               data-en-text="View project">
@@ -147,10 +307,72 @@
 
   <!-- =================== FIN SECTION PROJETS ================== -->
 
-  <footer class="footer">
-    <div class="contact-line">
-      <h2 class="test-anim">Contact</h2>
-      <hr>
+  <footer class="footer" id="Contact">
+    <div class="contact-section">
+
+      <div class="contact-left">
+        <div>
+          <p class="contact-label" data-fr="Contact" data-en="Contact">Contact</p>
+          <h2 class="contact-title" id="contactTitle">
+            Travaillons<br><span>ensemble.</span>
+          </h2>
+          <p class="contact-subtitle"
+            data-fr="Ouvert aux opportunités d'alternance et de stage. N'hésitez pas à me contacter, je réponds rapidement."
+            data-en="Open to apprenticeship and internship opportunities. Feel free to reach out, I reply quickly.">
+            Ouvert aux opportunités d'alternance et de stage. N'hésitez pas à me contacter, je réponds rapidement.
+          </p>
+          <div class="contact-avail">
+            <span class="contact-avail-dot"></span>
+            <span data-fr="Disponible pour une alternance" data-en="Available for apprenticeship">Disponible pour une
+              alternance</span>
+          </div>
+        </div>
+        <p class="contact-copy">© 2025 Clément Humez</p>
+      </div>
+
+      <div class="contact-right">
+        <p class="contact-label" data-fr="Me retrouver" data-en="Find me">Me retrouver</p>
+        <div class="contact-links">
+
+          <a class="contact-link contact-link--mail" href="mailto:clement.humez@orange.fr">
+            <div class="contact-link__icon mail">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+            <div class="contact-link__body">
+              <p class="contact-link__label">Email</p>
+              <p class="contact-link__value">clement.humez@orange.fr</p>
+            </div>
+            <span class="contact-link__arrow">↗</span>
+          </a>
+
+          <hr class="contact-divider">
+
+          <a class="contact-link contact-link--linkedin" href="https://www.linkedin.com/in/clément-humez-54962533a/"
+            target="_blank">
+            <div class="contact-link__icon linkedin">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </div>
+            <div class="contact-link__body">
+              <p class="contact-link__label">LinkedIn</p>
+              <p class="contact-link__value">Clément Humez</p>
+            </div>
+            <span class="contact-link__arrow">↗</span>
+          </a>
+
+          <a class="contact-link contact-link--github" href="https://github.com/Clement-Dev60" target="_blank">
+            <div class="contact-link__icon github">
+              <ion-icon name="logo-github"></ion-icon>
+            </div>
+            <div class="contact-link__body">
+              <p class="contact-link__label">GitHub</p>
+              <p class="contact-link__value">Clement-Dev60</p>
+            </div>
+            <span class="contact-link__arrow">↗</span>
+          </a>
+
+        </div>
+      </div>
+
     </div>
   </footer>
 
