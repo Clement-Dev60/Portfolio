@@ -1620,3 +1620,289 @@ body {
 		font-size: clamp(24px, 5vw, 50px);
 	}
 }
+
+/* ============ SECTION SKILLS ============ */
+.skills-section {
+	min-height: 100vh;
+	padding: 80px 60px 80px calc(var(--sidenav-offset) + 40px);
+	background: var(--bg-color);
+	scroll-margin-top: 72px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.skills-header {
+	text-align: center;
+	margin-bottom: 64px;
+}
+
+.skills-title {
+	font-family: var(--card-font-display);
+	font-size: clamp(32px, 4vw, 54px);
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	color: var(--text-color);
+	margin: 0;
+}
+
+.skills-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+	gap: 16px;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.skill-card {
+	background: var(--card-surface);
+	border: 1px solid var(--card-border);
+	border-radius: 14px;
+	padding: 24px 12px 18px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	cursor: default;
+	transition: transform 0.3s var(--card-ease-expo), border-color 0.3s ease,
+		box-shadow 0.3s ease;
+	position: relative;
+	overflow: hidden;
+}
+
+.skill-card::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(
+		circle at 50% 0%,
+		var(--skill-color, rgba(232, 255, 87, 0.08)) 0%,
+		transparent 70%
+	);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.skill-card:hover {
+	transform: translateY(-6px);
+	border-color: var(--skill-color-border, rgba(232, 255, 87, 0.4));
+	box-shadow: 0 12px 32px var(--skill-shadow, rgba(232, 255, 87, 0.12));
+}
+
+.skill-card:hover::before {
+	opacity: 1;
+}
+
+.skill-icon {
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	position: relative;
+	z-index: 1;
+}
+
+.skill-icon svg {
+	width: 40px;
+	height: 40px;
+}
+
+.skill-name {
+	font-family: var(--card-font-mono);
+	font-size: 11px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--card-text-muted);
+	text-align: center;
+	position: relative;
+	z-index: 1;
+	transition: color 0.3s;
+}
+
+.skill-card:hover .skill-name {
+	color: #f0f0f5;
+}
+
+.skill-level {
+	width: 100%;
+	height: 2px;
+	background: rgba(255, 255, 255, 0.08);
+	border-radius: 2px;
+	overflow: hidden;
+	position: relative;
+	z-index: 1;
+}
+
+.skill-level-bar {
+	height: 100%;
+	border-radius: 2px;
+	background: var(--skill-color-border, var(--card-accent-1));
+	width: 0;
+	transition: width 1s var(--card-ease-expo);
+}
+
+.skill-card.revealed .skill-level-bar {
+	width: var(--skill-pct, 80%);
+}
+
+@media (max-width: 1024px) {
+	.skills-section {
+		padding: 80px 20px 60px;
+	}
+}
+
+@media (max-width: 480px) {
+	.skills-grid {
+		grid-template-columns: repeat(3, 1fr);
+		gap: 10px;
+	}
+	.skill-card {
+		padding: 18px 8px 14px;
+	}
+	.skill-icon svg {
+		width: 32px;
+		height: 32px;
+	}
+}
+
+/* ============ EASTER EGG — TERMINAL ============ */
+.terminal-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.85);
+	z-index: 9999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+	backdrop-filter: blur(4px);
+}
+
+.terminal-overlay.open {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.terminal {
+	width: min(680px, 90vw);
+	background: #0d0d12;
+	border: 1px solid rgba(232, 255, 87, 0.3);
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 0 60px rgba(232, 255, 87, 0.1), 0 24px 80px rgba(0, 0, 0, 0.6);
+	transform: translateY(20px) scale(0.97);
+	transition: transform 0.35s var(--card-ease-expo);
+}
+
+.terminal-overlay.open .terminal {
+	transform: translateY(0) scale(1);
+}
+
+.terminal-bar {
+	background: #1a1a24;
+	padding: 12px 16px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.terminal-dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.terminal-dot.red {
+	background: #ff5f57;
+}
+.terminal-dot.yellow {
+	background: #ffbd2e;
+}
+.terminal-dot.green {
+	background: #28c840;
+}
+
+.terminal-title {
+	font-family: var(--card-font-mono);
+	font-size: 12px;
+	color: rgba(255, 255, 255, 0.35);
+	margin-left: 8px;
+	letter-spacing: 0.05em;
+}
+
+.terminal-body {
+	padding: 20px 24px;
+	min-height: 320px;
+	max-height: 60vh;
+	overflow-y: auto;
+	font-family: var(--card-font-mono);
+	font-size: 13px;
+	line-height: 1.8;
+}
+
+.terminal-line {
+	color: #e8ff57;
+	margin: 0;
+	opacity: 0;
+	transform: translateY(4px);
+	transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.terminal-line.show {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.terminal-line.white {
+	color: rgba(255, 255, 255, 0.85);
+}
+.terminal-line.muted {
+	color: rgba(255, 255, 255, 0.35);
+}
+.terminal-line.green {
+	color: #00d9ff;
+}
+.terminal-line.red {
+	color: #ff4d6d;
+}
+.terminal-line.purple {
+	color: #b87cff;
+}
+
+.terminal-input-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 8px;
+}
+
+.terminal-prompt {
+	color: #e8ff57;
+}
+
+.terminal-input {
+	background: transparent;
+	border: none;
+	outline: none;
+	font-family: var(--card-font-mono);
+	font-size: 13px;
+	color: rgba(255, 255, 255, 0.85);
+	caret-color: #e8ff57;
+	flex: 1;
+}
+
+.terminal-hint {
+	position: absolute;
+	bottom: 20px;
+	right: 24px;
+	font-family: var(--card-font-mono);
+	font-size: 10px;
+	color: rgba(255, 255, 255, 0.2);
+	letter-spacing: 0.08em;
+}

@@ -62,9 +62,12 @@
   </div>
 
   <!-- ===== SIDEBAR DE NAVIGATION ===== -->
+  <!-- ===== SIDEBAR DE NAVIGATION — remplace ton <aside class="side-nav"> existant ===== -->
+
   <aside class="side-nav" id="sideNav">
     <div class="side-nav-pill" id="sideNavPill"></div>
 
+    <!-- snBtn0 → À propos -->
     <button class="side-nav-btn active" id="snBtn0" data-label="À propos" onclick="sideNavGoTo(0)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
         stroke-linejoin="round">
@@ -73,6 +76,7 @@
       </svg>
     </button>
 
+    <!-- snBtn1 → Projets -->
     <button class="side-nav-btn" id="snBtn1" data-label="Projets" onclick="sideNavGoTo(1)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
         stroke-linejoin="round">
@@ -83,7 +87,17 @@
       </svg>
     </button>
 
-    <button class="side-nav-btn" id="snBtn2" data-label="Contact" onclick="sideNavGoTo(2)">
+    <!-- snBtn2 → Skills -->
+    <button class="side-nav-btn" id="snBtn2" data-label="Skills" onclick="sideNavGoTo(2)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+        stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    </button>
+
+    <!-- snBtn3 → Contact -->
+    <button class="side-nav-btn" id="snBtn3" data-label="Contact" onclick="sideNavGoTo(3)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
         stroke-linejoin="round">
         <path
@@ -308,6 +322,254 @@
 
     </section>
 
+    <!-- ===================== SECTION SKILLS ===================== -->
+    <section class="skills-section" id="Skills">
+
+      <div class="skills-header">
+        <h2 class="skills-title" data-fr="Compétences" data-en="Skills">Compétences</h2>
+      </div>
+
+      <div class="skills-grid">
+
+        <!-- HTML/CSS -->
+        <div class="skill-card"
+          style="--skill-color:rgba(228,77,38,0.1);--skill-color-border:rgba(228,77,38,0.5);--skill-shadow:rgba(228,77,38,0.15);--skill-pct:90%">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 3L5.5 19L12 21L18.5 19L20 3H4Z" fill="#E44D26" opacity="0.9" />
+              <path d="M12 5H7L7.5 11H12V13H9L9.3 16.5L12 17.2V19.2L7.5 18L7 12.5H5L4 3H20L18.5 12.5H12V5Z" fill="white"
+                opacity="0.9" />
+            </svg>
+          </div>
+          <span class="skill-name">HTML/CSS</span>
+          <div class="skill-level">
+            <div class="skill-level-bar"></div>
+          </div>
+        </div>
+
+        <!-- JavaScript -->
+        <div class="skill-card"
+          style="--skill-color:rgba(247,223,30,0.1);--skill-color-border:rgba(247,223,30,0.5);--skill-shadow:rgba(247,223,30,0.15);--skill-pct:82%">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="24" rx="3" fill="#F7DF1E" />
+              <path
+                d="M7 16.5C7.4 17.2 7.9 17.7 8.9 17.7C9.8 17.7 10.4 17.2 10.4 16.5C10.4 15.6 9.8 15.3 8.9 14.9L8.4 14.7C6.9 14.1 5.9 13.3 5.9 11.6C5.9 10 7.1 8.8 8.9 8.8C10.2 8.8 11.1 9.3 11.7 10.3L10.3 11.2C9.9 10.5 9.5 10.2 8.9 10.2C8.2 10.2 7.7 10.7 7.7 11.3C7.7 12.1 8.2 12.4 9.1 12.8L9.6 13C11.3 13.7 12.3 14.5 12.3 16.2C12.3 18 10.9 19 8.9 19C6.9 19 5.7 18.1 5 16.8L7 16.5Z"
+                fill="#333" />
+              <path
+                d="M13.5 16.3C14 17.2 14.7 17.8 15.9 17.8C16.9 17.8 17.5 17.3 17.5 16.6V8.9H19.3V16.6C19.3 18.3 18.3 19 16 19C13.9 19 12.7 17.9 12.1 16.7L13.5 16.3Z"
+                fill="#333" />
+            </svg>
+          </div>
+          <span class="skill-name">JavaScript</span>
+          <div class="skill-level">
+            <div class="skill-level-bar"></div>
+          </div>
+        </div>
+
+        <!-- React -->
+        <div class="skill-card"
+          style="--skill-color:rgba(97,218,251,0.1);--skill-color-border:rgba(97,218,251,0.5);--skill-shadow:rgba(97,218,251,0.15);--skill-pct:70%">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="2" fill="#61DAFB" />
+              <ellipse cx="12" cy="12" rx="10" ry="4" stroke="#61DAFB" stroke-width="1.2" fill="none" />
+              <ellipse cx="12" cy="12" rx="10" ry="4" stroke="#61DAFB" stroke-width="1.2" fill="none"
+                transform="rotate(60 12 12)" />
+              <ellipse cx="12" cy="12" rx="10" ry="4" stroke="#61DAFB" stroke-width="1.2" fill="none"
+                transform="rotate(120 12 12)" />
+            </svg>
+          </div>
+          <span class="skill-name">React</span>
+          <div class="skill-level">
+            <div class="skill-level-bar"></div>
+          </div>
+        </div>
+
+        <!-- Python -->
+        <div class="skill-card"
+          style="--skill-color:rgba(55,118,171,0.1);--skill-color-border:rgba(55,118,171,0.5);--skill-shadow:rgba(55,118,171,0.15);--skill-pct:85%">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12 2C9.2 2 7 3.6 7 5.5V8H12V9H5C3.3 9 2 10.5 2 12.5C2 14.5 3.3 16 5 16H7V13.5C7 11.6 9.2 10 12 10C14.8 10 17 11.6 17 13.5V16H19C20.7 16 22 14.5 22 12.5C22 10.5 20.7 9 19 9H17V8H17V5.5C17 3.6 14.8 2 12 2Z"
+                fill="#3776AB" />
+              <path
+                d="M7 16V18.5C7 20.4 9.2 22 12 22C14.8 22 17 20.4 17 18.5V16H12V15H19C20.7 15 22 13.5 22 11.5V16H19C20.7 16 22 17.5 22 19.5C22 21.5 20.7 23 19 23"
+                fill="#FFD43B" opacity="0" />
+              <circle cx="9.5" cy="5.5" r="1" fill="white" />
+              <circle cx="14.5" cy="18.5" r="1" fill="white" />
+              <path
+                d="M12 2C9.2 2 7 3.6 7 5.5V8H12V9H5C3.3 9 2 10.5 2 12.5C2 14.5 3.3 16 5 16H7V13.5C7 11.6 9.2 10 12 10C14.8 10 17 11.6 17 13.5V16H19C20.7 16 22 14.5 22 12.5C22 10.5 20.7 9 19 9H17V5.5C17 3.6 14.8 2 12 2Z"
+                fill="url(#pyGrad)" />
+              <defs>
+                <linearGradient id="pyGrad" x1="2" y1="2" x2="22" y2="22">
+                  <stop offset="0%" stop-color="#3776AB" />
+                  <stop offset="100%" stop-color="#FFD43B" />
+                </linearGradient>
+              </defs>
+              <circle cx="9.5" cy="5.5" r="1" fill="white" />
+              <circle cx="14.5" cy="18.5" r="1" fill="white" />
+            </svg>
+          </div>
+          <span class="skill-name">Python</span>
+          <div class="skill-level">
+            <div class="skill-level-bar"></div>
+          </div>
+        </div>
+
+        <!-- PHP -->
+        <div class="skill-card"
+          style="--skill-color:rgba(119,123,180,0.1);--skill-color-border:rgba(119,123,180,0.5);--skill-shadow:rgba(119,123,180,0.15);--skill-pct:78%">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="12" cy="12" rx="10" ry="6" fill="#777BB4" opacity="0.15" stroke="#777BB4" stroke-width="1" />
+              <text x="12" y="16" font-family="monospace" font-size="8" font-weight="bold" fill="#777BB4"
+                text-anchor="middle">PHP</text>
+            </svg>
+          </div>
+          <span class="skill-name">PHP</span>
+          <div class="skill-level">
+            <div class="skill-level-bar"></div>
+          </div>
+        </div>
+
+        <!-- Symfony -->
+        <div class="skill-card"
+          style="--skill-color:rgba(26,26,26,0.3);--skill-color-border:rgba(255,255,255,0.3);--skill-shadow:rgba(255,255,255,0.08);--skill-pct:72%">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z"
+                fill="#1A1A1A" stroke="rgba(255,255,255,0.3)" stroke-width="0.5" />
+              <path
+                d="M8.5 9C8.5 7.9 9.4 7 10.5 7C11.3 7 12 7.4 12.3 8L13.5 7.3C12.9 6.2 11.8 5.5 10.5 5.5C8.6 5.5 7 7 7 9C7 10.5 8 11.5 9.5 12C10.8 12.4 11.5 12.8 11.5 13.5C11.5 14.3 10.8 14.8 9.8 14.8C8.8 14.8 8 14.2 7.7 13.3L6.5 14C7 15.3 8.3 16.3 9.8 16.3C11.6 16.3 13 15.1 13 13.5C13 12 12 11 10.5 10.5C9.3 10.1 8.5 9.7 8.5 9Z"
+                fill="white" />
+              <path
+                d="M14 8.5C14.4 8.2 14.9 8 15.5 8C16.3 8 17 8.4 17 9C17 9.5 16.6 9.8 16 10H15V11.5H16C16.8 11.5 17.5 12 17.5 12.8C17.5 13.7 16.7 14.3 15.7 14.3C14.8 14.3 14.1 13.9 13.7 13.2L12.5 13.9C13.1 15 14.3 15.8 15.7 15.8C17.4 15.8 19 14.6 19 12.8C19 11.8 18.5 11 17.7 10.5C18.2 10.1 18.5 9.6 18.5 9C18.5 7.6 17.2 6.5 15.5 6.5C14.5 6.5 13.6 6.9 13 7.5L14 8.5Z"
+                fill="white" />
+            </svg>
+          </div>
+          <span class="skill-name">Symfony</span>
+          <div class="skill-level">
+            <div class="skill-level-bar"></div>
+          </div>
+        </div>
+
+        <!-- Java -->
+        <div class="skill-card"
+          style="--skill-color:rgba(237,117,30,0.1);--skill-color-border:rgba(237,117,30,0.5);--skill-shadow:rgba(237,117,30,0.15);--skill-pct:68%">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M9.5 16.5C9.5 16.5 8.5 17 10.2 17.2C12.2 17.4 13.2 17.4 15.4 17C15.4 17 16 17.4 16.8 17.6C12.3 19.5 6.6 17.5 9.5 16.5Z"
+                fill="#EA2D2E" />
+              <path
+                d="M8.8 14.2C8.8 14.2 7.7 15 9.4 15.2C11.6 15.4 13.3 15.5 16.3 14.9C16.3 14.9 16.7 15.3 17.3 15.5C11.9 17.1 5.8 15.6 8.8 14.2Z"
+                fill="#EA2D2E" />
+              <path
+                d="M13.5 9.5C14.7 10.9 13.1 12.2 13.1 12.2C13.1 12.2 16.1 10.7 14.7 8.8C13.4 7 12.4 6.1 17.5 3C17.5 3 9.8 5 13.5 9.5Z"
+                fill="#EA2D2E" />
+              <path
+                d="M19.1 18.2C19.1 18.2 19.8 18.8 18.4 19.2C15.6 20.1 8.5 20.4 6 19.3C5.1 18.9 6.7 18.3 7.2 18.2C7.7 18.1 8 18.1 8 18.1C6.9 17.3 1 19.1 4.8 19.7C15.3 21.5 23.9 18.8 19.1 18.2Z"
+                fill="#5382A1" />
+              <path
+                d="M10 12.2C10 12.2 5.5 13.3 8.4 13.7C9.6 13.9 12 13.8 14.2 13.4C16 13.1 17.8 12.4 17.8 12.4C17.8 12.4 17.1 12.7 16.5 13C11.6 14.2 4 12.8 6 11.9C7.6 11.1 10 12.2 10 12.2Z"
+                fill="#5382A1" />
+            </svg>
+          </div>
+          <span class="skill-name">Java</span>
+          <div class="skill-level">
+            <div class="skill-level-bar"></div>
+          </div>
+        </div>
+
+        <!-- Ruby -->
+        <div class="skill-card"
+          style="--skill-color:rgba(204,52,45,0.1);--skill-color-border:rgba(204,52,45,0.5);--skill-shadow:rgba(204,52,45,0.15);--skill-pct:60%">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.9 8.5L15.5 3.1L7 5.5L3 13.5L8.5 20.9L17 18.5L20.9 8.5Z" fill="#CC342D" opacity="0.9" />
+              <path d="M12 8L9 11L12 15L15 11L12 8Z" fill="white" opacity="0.3" />
+            </svg>
+          </div>
+          <span class="skill-name">Ruby</span>
+          <div class="skill-level">
+            <div class="skill-level-bar"></div>
+          </div>
+        </div>
+
+        <!-- Git -->
+        <div class="skill-card"
+          style="--skill-color:rgba(240,80,51,0.1);--skill-color-border:rgba(240,80,51,0.5);--skill-shadow:rgba(240,80,51,0.15);--skill-pct:88%">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M22.2 10.8L13.2 1.8C12.5 1.1 11.5 1.1 10.8 1.8L9 3.6L11.2 5.8C11.9 5.6 12.7 5.7 13.3 6.3C13.9 6.9 14.1 7.7 13.9 8.4L16 10.5C16.7 10.3 17.5 10.5 18.1 11.1C19 12 19 13.4 18.1 14.3C17.2 15.2 15.8 15.2 14.9 14.3C14.3 13.7 14.1 12.8 14.4 12.1L12.4 10.1V15.3C12.6 15.4 12.8 15.5 13 15.7C13.9 16.6 13.9 18 13 18.9C12.1 19.8 10.7 19.8 9.8 18.9C8.9 18 8.9 16.6 9.8 15.7C10.1 15.4 10.4 15.2 10.7 15.1V9.9C10.4 9.8 10.1 9.6 9.8 9.3C9.2 8.7 9 7.8 9.3 7.1L7.2 5L1.8 10.4C1.1 11.1 1.1 12.1 1.8 12.8L10.8 21.8C11.5 22.5 12.5 22.5 13.2 21.8L22.2 12.8C22.9 12.1 22.9 11.5 22.2 10.8Z"
+                fill="#F05133" />
+            </svg>
+          </div>
+          <span class="skill-name">Git</span>
+          <div class="skill-level">
+            <div class="skill-level-bar"></div>
+          </div>
+        </div>
+
+        <!-- Cybersécurité -->
+        <div class="skill-card"
+          style="--skill-color:rgba(255,77,109,0.1);--skill-color-border:rgba(255,77,109,0.5);--skill-shadow:rgba(255,77,109,0.15);--skill-pct:65%">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ff4d6d" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              <path d="M9 12l2 2 4-4" />
+            </svg>
+          </div>
+          <span class="skill-name">Cybersec</span>
+          <div class="skill-level">
+            <div class="skill-level-bar"></div>
+          </div>
+        </div>
+
+        <!-- Linux -->
+        <div class="skill-card"
+          style="--skill-color:rgba(255,193,7,0.1);--skill-color-border:rgba(255,193,7,0.5);--skill-shadow:rgba(255,193,7,0.15);--skill-pct:75%">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12 2C9.5 2 8 4 8 6.5C8 8.5 8.5 10 9 11.5C9.5 13 9.5 14.5 8 16C7 17 6 17.5 6 18.5C6 20 8 21 9.5 21.5C10.5 21.8 11.3 22 12 22C12.7 22 13.5 21.8 14.5 21.5C16 21 18 20 18 18.5C18 17.5 17 17 16 16C14.5 14.5 14.5 13 15 11.5C15.5 10 16 8.5 16 6.5C16 4 14.5 2 12 2Z"
+                fill="#FFC107" opacity="0.8" />
+              <circle cx="10.5" cy="8.5" r="1" fill="#1a1a2e" />
+              <circle cx="13.5" cy="8.5" r="1" fill="#1a1a2e" />
+              <path d="M10 17.5C10 17.5 10 19 11 19.5M14 17.5C14 17.5 14 19 13 19.5" stroke="#1a1a2e"
+                stroke-width="0.8" />
+            </svg>
+          </div>
+          <span class="skill-name">Linux</span>
+          <div class="skill-level">
+            <div class="skill-level-bar"></div>
+          </div>
+        </div>
+
+        <!-- Tailwind -->
+        <div class="skill-card"
+          style="--skill-color:rgba(6,182,212,0.1);--skill-color-border:rgba(6,182,212,0.5);--skill-shadow:rgba(6,182,212,0.15);--skill-pct:74%">
+          <div class="skill-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12 6C9.5 6 8 7.5 7.5 10.5C8.5 9 9.75 8.25 11.25 8.25C12.13 8.25 12.75 8.63 13.5 9.09C14.62 9.78 15.88 10.5 18 10.5C20.5 10.5 22 9 22.5 6C21.5 7.5 20.25 8.25 18.75 8.25C17.87 8.25 17.25 7.87 16.5 7.41C15.38 6.72 14.12 6 12 6ZM7.5 13.5C5 13.5 3.5 15 3 18C4 16.5 5.25 15.75 6.75 15.75C7.63 15.75 8.25 16.13 9 16.59C10.12 17.28 11.38 18 13.5 18C16 18 17.5 16.5 18 13.5C17 15 15.75 15.75 14.25 15.75C13.37 15.75 12.75 15.37 12 14.91C10.88 14.22 9.62 13.5 7.5 13.5Z"
+                fill="#06B6D4" />
+            </svg>
+          </div>
+          <span class="skill-name">Tailwind</span>
+          <div class="skill-level">
+            <div class="skill-level-bar"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
   </main>
 
   <!-- ===================== FOOTER / CONTACT ===================== -->
@@ -335,8 +597,7 @@
       <div class="contact-right">
         <p class="contact-label" data-fr="Me retrouver" data-en="Find me">Me retrouver</p>
         <div class="contact-links">
-          <a class="contact-link contact-link--mail"
-            href="mailto:humez.clement@gmail.com">
+          <a class="contact-link contact-link--mail" href="mailto:humez.clement@gmail.com">
             <div class="contact-link__icon mail"><ion-icon name="mail-outline"></ion-icon></div>
             <div class="contact-link__body">
               <p class="contact-link__label">Email</p>
@@ -381,6 +642,27 @@
 
   <script src="assets/js/script.js"></script>
 
+  <div class="terminal-overlay" id="terminalOverlay">
+    <div class="terminal" id="terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dot red" onclick="closeTerminal()"></div>
+        <div class="terminal-dot yellow" onclick="closeTerminal()"></div>
+        <div class="terminal-dot green"></div>
+        <span class="terminal-title">clement@portfolio ~ </span>
+      </div>
+      <div class="terminal-body" id="terminalBody">
+        <!-- Les lignes sont injectées par JS -->
+      </div>
+      <div style="position:relative; padding: 4px 24px 16px;">
+        <div class="terminal-input-row">
+          <span class="terminal-prompt">➜</span>
+          <input class="terminal-input" id="terminalInput" type="text" autocomplete="off" spellcheck="false"
+            placeholder="tape 'help'..." />
+        </div>
+        <span class="terminal-hint">ESC pour fermer</span>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

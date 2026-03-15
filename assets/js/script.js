@@ -156,11 +156,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---- SIDEBAR ----
 
-    var SN_IDS = ["À_propos", "Projets", "Contact"];
-    var SN_COLORS = ["#e8ff57", "#00d9ff", "#b87cff"];
-    var SN_SHADOWS = ["rgba(232,255,87,0.5)", "rgba(0,217,255,0.5)", "rgba(184,124,255,0.5)"];
+    var SN_IDS = ["À_propos", "Projets", "Skills", "Contact"];
+    var SN_COLORS = ["#e8ff57", "#00d9ff", "#ff4d6d", "#b87cff"];
+    var SN_SHADOWS = [
+        "rgba(232,255,87,0.5)",
+        "rgba(0,217,255,0.5)",
+        "rgba(255,77,109,0.5)",
+        "rgba(184,124,255,0.5)"
+    ];
 
-    var snBtns = [0, 1, 2].map(function (i) { return document.getElementById("snBtn" + i); });
+    var snBtns = [0, 1, 2, 3].map(function (i) { return document.getElementById("snBtn" + i); });
     var snTargets = SN_IDS.map(function (id) { return document.getElementById(id); }).filter(Boolean);
 
     var currentSection = -1;
@@ -209,4 +214,222 @@ document.addEventListener("DOMContentLoaded", function () {
 
     detectSection();
 
+    // ============================================================
+    // COLLE CE CODE À LA FIN DE TON DOMContentLoaded,
+    // juste avant le dernier }); de fermeture
+    // ============================================================
+
+
+    // ---- SIDEBAR — mettre à jour SN_IDS et snBtns ----
+    // Remplace dans ton script.js :
+    //
+    //   var SN_IDS = ["À_propos", "Projets", "Contact"];
+    // par :
+    //   var SN_IDS = ["À_propos", "Projets", "Skills", "Contact"];
+    //
+    // Et :
+    //   var snBtns = [0,1,2].map(...)
+    // par :
+    //   var snBtns = [0,1,2,3].map(...)
+
+
+    // ---- SKILLS — animation des barres au scroll ----
+
+    var skillCards = document.querySelectorAll(".skill-card");
+
+    if (skillCards.length > 0 && "IntersectionObserver" in window) {
+        var skillObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("revealed");
+                    skillObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        skillCards.forEach(function (card) {
+            skillObserver.observe(card);
+        });
+    }
+
+
+    // ---- TERMINAL EASTER EGG ----
+
+    var terminalOverlay = document.getElementById("terminalOverlay");
+    var terminalBody = document.getElementById("terminalBody");
+    var terminalInput = document.getElementById("terminalInput");
+
+    // Historique des commandes
+    var cmdHistory = [];
+    var cmdIndex = -1;
+
+    // Séquence Konami
+    var KONAMI = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+    var konamiPos = 0;
+
+    // Contenu des lignes d'intro
+    var INTRO_LINES = [
+        { text: "  ██████╗██╗      █████╗  ██╗  ██╗", cls: "purple" },
+        { text: " ██╔════╝██║     ██╔══██╗ ██║ ██╔╝", cls: "purple" },
+        { text: " ██║     ██║     ███████║ █████╔╝ ", cls: "purple" },
+        { text: " ██║     ██║     ██╔══██║ ██╔═██╗ ", cls: "purple" },
+        { text: " ╚██████╗███████╗██║  ██║ ██║  ██╗", cls: "purple" },
+        { text: "  ╚═════╝╚══════╝╚═╝  ╚═╝ ╚═╝  ╚═╝", cls: "purple" },
+        { text: "", cls: "muted" },
+        { text: " Clément Humez — Portfolio v1.0.0", cls: "white" },
+        { text: " Développeur Junior · Cybersécurité", cls: "muted" },
+        { text: "", cls: "muted" },
+        { text: " Tu as trouvé l'easter egg 🎉", cls: "green" },
+        { text: " Tape 'help' pour voir les commandes.", cls: "muted" },
+        { text: "", cls: "muted" },
+    ];
+
+    var COMMANDS = {
+        help: [
+            { text: " Commandes disponibles :", cls: "white" },
+            { text: "  whoami    → qui suis-je ?", cls: "" },
+            { text: "  skills    → mes compétences", cls: "" },
+            { text: "  ctf       → mes challenges", cls: "" },
+            { text: "  contact   → me contacter", cls: "" },
+            { text: "  matrix    → 🐇", cls: "" },
+            { text: "  clear     → vider le terminal", cls: "" },
+            { text: "  exit      → fermer", cls: "" },
+        ],
+        whoami: [
+            { text: " Clément Humez", cls: "white" },
+            { text: " Développeur junior full-stack", cls: "" },
+            { text: " Passionné de cybersécurité & CTF", cls: "" },
+            { text: " Basé en France 🇫🇷", cls: "" },
+            { text: " Recherche alternance / stage", cls: "green" },
+        ],
+        skills: [
+            { text: " Stack technique :", cls: "white" },
+            { text: "  [████████░░] Python      85%", cls: "green" },
+            { text: "  [█████████░] HTML/CSS    90%", cls: "green" },
+            { text: "  [████████░░] JavaScript  82%", cls: "green" },
+            { text: "  [███████░░░] PHP/Symfony  78%", cls: "green" },
+            { text: "  [███████░░░] React        70%", cls: "green" },
+            { text: "  [██████░░░░] Java         68%", cls: "green" },
+            { text: "  [██████░░░░] CTF/Secu     65%", cls: "red" },
+        ],
+        ctf: [
+            { text: " CTF & Cybersécurité :", cls: "white" },
+            { text: "  Plateformes : Root-Me, TryHackMe", cls: "" },
+            { text: "  Catégories  : Web, Forensics, Misc", cls: "" },
+            { text: "  Niveau      : Débutant → Intermédiaire", cls: "" },
+            { text: "  Objectif    : Spécialisation sécurité", cls: "green" },
+        ],
+        contact: [
+            { text: " Me contacter :", cls: "white" },
+            { text: "  Email    : clement.humez@orange.fr", cls: "" },
+            { text: "  LinkedIn : Clément Humez", cls: "" },
+            { text: "  GitHub   : Clement-Dev60", cls: "" },
+        ],
+        matrix: [
+            { text: " Wake up, Neo...", cls: "green" },
+            { text: " The Matrix has you.", cls: "green" },
+            { text: " Follow the white rabbit. 🐇", cls: "green" },
+        ],
+        exit: null,
+        clear: null,
+    };
+
+    function addLine(text, cls, delay) {
+        var p = document.createElement("p");
+        p.className = "terminal-line" + (cls ? " " + cls : "");
+        p.textContent = text;
+        terminalBody.appendChild(p);
+        setTimeout(function () { p.classList.add("show"); }, delay || 0);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+        return p;
+    }
+
+    function openTerminal() {
+        if (!terminalOverlay) return;
+        terminalOverlay.classList.add("open");
+        terminalBody.innerHTML = "";
+        INTRO_LINES.forEach(function (l, i) {
+            addLine(l.text, l.cls, i * 40);
+        });
+        setTimeout(function () {
+            if (terminalInput) terminalInput.focus();
+        }, INTRO_LINES.length * 40 + 100);
+    }
+
+    function closeTerminal() {
+        if (!terminalOverlay) return;
+        terminalOverlay.classList.remove("open");
+    }
+
+    window.closeTerminal = closeTerminal;
+
+    function runCommand(cmd) {
+        cmd = cmd.trim().toLowerCase();
+        if (!cmd) return;
+
+        // Affiche la commande tapée
+        addLine("➜  " + cmd, "");
+        cmdHistory.unshift(cmd);
+        cmdIndex = -1;
+
+        if (cmd === "exit") { closeTerminal(); return; }
+        if (cmd === "clear") { terminalBody.innerHTML = ""; return; }
+
+        var lines = COMMANDS[cmd];
+        if (lines) {
+            lines.forEach(function (l, i) {
+                addLine(l.text, l.cls, i * 60);
+            });
+        } else {
+            addLine(" Commande inconnue : '" + cmd + "'. Tape 'help'.", "red");
+        }
+        addLine("", "muted");
+    }
+
+    if (terminalInput) {
+        terminalInput.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                runCommand(terminalInput.value);
+                terminalInput.value = "";
+            }
+            if (e.key === "ArrowUp") {
+                cmdIndex = Math.min(cmdIndex + 1, cmdHistory.length - 1);
+                terminalInput.value = cmdHistory[cmdIndex] || "";
+            }
+            if (e.key === "ArrowDown") {
+                cmdIndex = Math.max(cmdIndex - 1, -1);
+                terminalInput.value = cmdIndex >= 0 ? cmdHistory[cmdIndex] : "";
+            }
+        });
+    }
+
+    // Ferme avec ESC, ouvre avec Ctrl+Shift+K
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") { closeTerminal(); return; }
+
+        if (e.ctrlKey && e.shiftKey && e.key === "K") {
+            e.preventDefault();
+            openTerminal();
+            return;
+        }
+
+        // Konami code
+        if (e.keyCode === KONAMI[konamiPos]) {
+            konamiPos++;
+            if (konamiPos === KONAMI.length) {
+                konamiPos = 0;
+                openTerminal();
+            }
+        } else {
+            konamiPos = 0;
+        }
+    });
+
+    // Ferme en cliquant sur l'overlay (hors terminal)
+    if (terminalOverlay) {
+        terminalOverlay.addEventListener("click", function (e) {
+            if (e.target === terminalOverlay) closeTerminal();
+        });
+    }
 });
+
