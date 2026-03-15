@@ -98,7 +98,6 @@ body {
   flex-shrink: 0;
 }
 
-/* Liens nav — toujours visibles, pas d'animation d'apparition */
 .header-nav {
   display: flex;
   align-items: center;
@@ -113,7 +112,7 @@ body {
   color: var(--text-color);
   text-decoration: none;
   opacity: 0;
-  transition: opacity 0.6s ease, color 0.2s;
+  transition: opacity 2s ease, color 0.2s;
 }
 
 .header-nav a.visible {
