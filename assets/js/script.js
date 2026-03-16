@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var snNav = document.getElementById("sideNav");
     var snPill = document.getElementById("sideNavPill");
 
-    // ---- SYNC BOUTONS MOBILES (déclarée en premier) ----
+    // ---- SYNC BOUTONS MOBILES ----
 
     function syncMobileButtons() {
         if (darkMobileBtn && toggle) darkMobileBtn.innerHTML = toggle.innerHTML;
@@ -74,12 +74,16 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll("[data-fr]").forEach(function (el) {
             el.textContent = el.dataset[currentLang];
         });
+        document.querySelectorAll("[data-label-fr]").forEach(function (el) {
+            el.setAttribute("data-label", el.dataset["label" + currentLang.charAt(0).toUpperCase() + currentLang.slice(1)]);
+        });
         var contactTitle = document.getElementById("contactTitle");
         if (contactTitle) {
             contactTitle.innerHTML = currentLang === "en"
                 ? "Let's work<br><span>together.</span>"
                 : "Travaillons<br><span>ensemble.</span>";
         }
+
     }
 
     translatePage();
@@ -111,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // ---- FONDU DES LIENS NAV ----
-    // Apparition progressive après le chargement de la page
 
     document.querySelectorAll(".header-nav a").forEach(function (el, i) {
         setTimeout(function () { el.classList.add("visible"); }, 800 + i * 200);
@@ -156,16 +159,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---- SIDEBAR ----
 
-    var SN_IDS = ["À_propos", "Skills", "Projets", "Contact"];
-    var SN_COLORS = ["#e8ff57", "#ff4d6d", "#00d9ff", "#b87cff"];
+    var SN_IDS = ["À_propos", "Skills", "Projets", "Parcours", "Contact"];
+    var SN_COLORS = ["#e8ff57", "#ff4d6d", "#00d9ff", "#e8ff57", "#b87cff"];
     var SN_SHADOWS = [
         "rgba(232,255,87,0.5)",
         "rgba(255,77,109,0.5)",
         "rgba(0,217,255,0.5)",
+        "rgba(232,255,87,0.5)",
         "rgba(184,124,255,0.5)"
     ];
 
-    var snBtns = [0, 1, 2, 3].map(function (i) { return document.getElementById("snBtn" + i); });
+    var snBtns = [0, 1, 2, 3, 4].map(function (i) { return document.getElementById("snBtn" + i); });
     var snTargets = SN_IDS.map(function (id) { return document.getElementById(id); }).filter(Boolean);
 
     var currentSection = -1;
@@ -186,6 +190,10 @@ document.addEventListener("DOMContentLoaded", function () {
         snPill.style.top = (btnRect.top - navRect.top + (btnRect.height - 28) / 2) + "px";
         snPill.style.background = SN_COLORS[i];
         snPill.style.boxShadow = "0 0 10px 2px " + SN_SHADOWS[i];
+
+        // Met à jour la barre de progression avec la couleur de la section
+        var bar = document.getElementById("scrollProgressBar");
+        if (bar) bar.style.background = SN_COLORS[i];
     }
 
     function detectSection() {
@@ -197,10 +205,26 @@ document.addEventListener("DOMContentLoaded", function () {
         sideNavSetActive(active);
     }
 
+    // ---- BARRE DE PROGRESSION SCROLL (feature 5) ----
+
+    var scrollBar = document.getElementById("scrollProgressBar");
+
+    function updateScrollBar() {
+        if (!scrollBar) return;
+        var scrollTop = window.scrollY;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        scrollBar.style.width = pct + "%";
+    }
+
     var ticking = false;
     window.addEventListener("scroll", function () {
         if (!ticking) {
-            requestAnimationFrame(function () { detectSection(); ticking = false; });
+            requestAnimationFrame(function () {
+                detectSection();
+                updateScrollBar();
+                ticking = false;
+            });
             ticking = true;
         }
     }, { passive: true });
@@ -213,10 +237,26 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     detectSection();
+    updateScrollBar();
 
-    var skillCards = document.querySelectorAll(".skill-card");
+    // ---- ANIMATIONS AU SCROLL (feature 4) ----
+    // Tous les éléments avec .reveal apparaissent en glissant vers le haut
 
-    if (skillCards.length > 0 && "IntersectionObserver" in window) {
+    if ("IntersectionObserver" in window) {
+        var revealObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("revealed");
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll(".reveal").forEach(function (el) {
+            revealObserver.observe(el);
+        });
+
+        // Skills — animation des barres
         var skillObserver = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
@@ -226,11 +266,44 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }, { threshold: 0.2 });
 
-        skillCards.forEach(function (card) {
+        document.querySelectorAll(".skill-card").forEach(function (card) {
             skillObserver.observe(card);
+        });
+
+        // Timeline — animation des items
+        var timelineObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("revealed");
+                    timelineObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll(".timeline-item").forEach(function (item) {
+            timelineObserver.observe(item);
         });
     }
 
+    // ---- TITRE ONGLET — FLICKER QUAND INACTIF (feature 6) ----
+
+    var originalTitle = document.title;
+    var altTitle = "\uD83D\uDCBC Ouvert aux offres — Clément Humez";
+    var titleInterval = null;
+    var titleToggle = false;
+
+    document.addEventListener("visibilitychange", function () {
+        if (document.hidden) {
+            titleInterval = setInterval(function () {
+                document.title = titleToggle ? altTitle : originalTitle;
+                titleToggle = !titleToggle;
+            }, 2000);
+        } else {
+            clearInterval(titleInterval);
+            document.title = originalTitle;
+            titleToggle = false;
+        }
+    });
 
     // ---- TERMINAL EASTER EGG ----
 
@@ -238,27 +311,24 @@ document.addEventListener("DOMContentLoaded", function () {
     var terminalBody = document.getElementById("terminalBody");
     var terminalInput = document.getElementById("terminalInput");
 
-    // Historique des commandes
     var cmdHistory = [];
     var cmdIndex = -1;
 
-    // Séquence Konami
     var KONAMI = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
     var konamiPos = 0;
 
-    // Contenu des lignes d'intro
     var INTRO_LINES = [
-        { text: "  ██████╗██╗      █████╗  ██╗  ██╗", cls: "purple" },
-        { text: " ██╔════╝██║     ██╔══██╗ ██║ ██╔╝", cls: "purple" },
-        { text: " ██║     ██║     ███████║ █████╔╝ ", cls: "purple" },
-        { text: " ██║     ██║     ██╔══██║ ██╔═██╗ ", cls: "purple" },
-        { text: " ╚██████╗███████╗██║  ██║ ██║  ██╗", cls: "purple" },
-        { text: "  ╚═════╝╚══════╝╚═╝  ╚═╝ ╚═╝  ╚═╝", cls: "purple" },
+        { text: "  \u2588\u2588\u2588\u2588\u2588\u2588\u2557\u2588\u2588\u2557      \u2588\u2588\u2588\u2588\u2588\u2557  \u2588\u2588\u2557  \u2588\u2588\u2557", cls: "purple" },
+        { text: " \u2588\u2588\u2554\u2550\u2550\u2550\u2550\u255d\u2588\u2588\u2551     \u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2557 \u2588\u2588\u2551 \u2588\u2588\u2554\u255d", cls: "purple" },
+        { text: " \u2588\u2588\u2551     \u2588\u2588\u2551     \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551 \u2588\u2588\u2588\u2588\u2588\u2554\u2557 ", cls: "purple" },
+        { text: " \u2588\u2588\u2551     \u2588\u2588\u2551     \u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2551 \u2588\u2588\u2554\u2550\u2588\u2588\u2557 ", cls: "purple" },
+        { text: " \u255a\u2588\u2588\u2588\u2588\u2588\u2588\u2557\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2557\u2588\u2588\u2551  \u2588\u2588\u2551 \u2588\u2588\u2551  \u2588\u2588\u2557", cls: "purple" },
+        { text: "  \u255a\u2550\u2550\u2550\u2550\u2550\u255d\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u255d\u255a\u2550\u255d  \u255a\u2550\u255d \u255a\u2550\u255d  \u255a\u2550\u255d", cls: "purple" },
         { text: "", cls: "muted" },
-        { text: " Clément Humez — Portfolio v1.0.0", cls: "white" },
+        { text: " Clément Humez — Portfolio v2.0.0", cls: "white" },
         { text: " Développeur Junior · Cybersécurité", cls: "muted" },
         { text: "", cls: "muted" },
-        { text: " Tu as trouvé l'easter egg 🎉", cls: "green" },
+        { text: " Tu as trouvé l'easter egg \uD83C\uDF89", cls: "green" },
         { text: " Tape 'help' pour voir les commandes.", cls: "muted" },
         { text: "", cls: "muted" },
     ];
@@ -266,30 +336,30 @@ document.addEventListener("DOMContentLoaded", function () {
     var COMMANDS = {
         help: [
             { text: " Commandes disponibles :", cls: "white" },
-            { text: "  whoami    → qui suis-je ?", cls: "" },
-            { text: "  skills    → mes compétences", cls: "" },
-            { text: "  ctf       → mes challenges", cls: "" },
-            { text: "  contact   → me contacter", cls: "" },
-            { text: "  matrix    → 🐇", cls: "" },
-            { text: "  clear     → vider le terminal", cls: "" },
-            { text: "  exit      → fermer", cls: "" },
+            { text: "  whoami    \u2192 qui suis-je ?", cls: "" },
+            { text: "  skills    \u2192 mes compétences", cls: "" },
+            { text: "  ctf       \u2192 mes challenges", cls: "" },
+            { text: "  contact   \u2192 me contacter", cls: "" },
+            { text: "  matrix    \u2192 \uD83D\uDC07", cls: "" },
+            { text: "  clear     \u2192 vider le terminal", cls: "" },
+            { text: "  exit      \u2192 fermer", cls: "" },
         ],
         whoami: [
             { text: " Clément Humez", cls: "white" },
             { text: " Développeur junior full-stack", cls: "" },
             { text: " Passionné de cybersécurité & CTF", cls: "" },
-            { text: " Basé en France 🇫🇷", cls: "" },
+            { text: " Basé en France \uD83C\uDDEB\uD83C\uDDF7", cls: "" },
             { text: " Recherche alternance / stage", cls: "green" },
         ],
         skills: [
             { text: " Stack technique :", cls: "white" },
-            { text: "  [████████░░] Python      85%", cls: "green" },
-            { text: "  [█████████░] HTML/CSS    90%", cls: "green" },
-            { text: "  [████████░░] JavaScript  82%", cls: "green" },
-            { text: "  [███████░░░] PHP/Symfony  78%", cls: "green" },
-            { text: "  [███████░░░] React        70%", cls: "green" },
-            { text: "  [██████░░░░] Java         68%", cls: "green" },
-            { text: "  [██████░░░░] CTF/Secu     65%", cls: "red" },
+            { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591] HTML/CSS    90%", cls: "green" },
+            { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591] Python     85%", cls: "green" },
+            { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591] JavaScript 82%", cls: "green" },
+            { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591] PHP/Symfony 78%", cls: "green" },
+            { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591] React      70%", cls: "green" },
+            { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591] Java       68%", cls: "green" },
+            { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591] CTF/Secu   65%", cls: "red" },
         ],
         ctf: [
             { text: " CTF & Cybersécurité :", cls: "white" },
@@ -300,14 +370,14 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
         contact: [
             { text: " Me contacter :", cls: "white" },
-            { text: "  Email    : clement.humez@orange.fr", cls: "" },
+            { text: "  Email    : humez.clement@gmail.com", cls: "" },
             { text: "  LinkedIn : Clément Humez", cls: "" },
             { text: "  GitHub   : Clement-Dev60", cls: "" },
         ],
         matrix: [
             { text: " Wake up, Neo...", cls: "green" },
             { text: " The Matrix has you.", cls: "green" },
-            { text: " Follow the white rabbit. 🐇", cls: "green" },
+            { text: " Follow the white rabbit. \uD83D\uDC07", cls: "green" },
         ],
         exit: null,
         clear: null,
@@ -320,19 +390,14 @@ document.addEventListener("DOMContentLoaded", function () {
         terminalBody.appendChild(p);
         setTimeout(function () { p.classList.add("show"); }, delay || 0);
         terminalBody.scrollTop = terminalBody.scrollHeight;
-        return p;
     }
 
     function openTerminal() {
         if (!terminalOverlay) return;
         terminalOverlay.classList.add("open");
         terminalBody.innerHTML = "";
-        INTRO_LINES.forEach(function (l, i) {
-            addLine(l.text, l.cls, i * 40);
-        });
-        setTimeout(function () {
-            if (terminalInput) terminalInput.focus();
-        }, INTRO_LINES.length * 40 + 100);
+        INTRO_LINES.forEach(function (l, i) { addLine(l.text, l.cls, i * 40); });
+        setTimeout(function () { if (terminalInput) terminalInput.focus(); }, INTRO_LINES.length * 40 + 100);
     }
 
     function closeTerminal() {
@@ -345,20 +410,14 @@ document.addEventListener("DOMContentLoaded", function () {
     function runCommand(cmd) {
         cmd = cmd.trim().toLowerCase();
         if (!cmd) return;
-
-        // Affiche la commande tapée
-        addLine("➜  " + cmd, "");
+        addLine("\u27A4  " + cmd, "");
         cmdHistory.unshift(cmd);
         cmdIndex = -1;
-
         if (cmd === "exit") { closeTerminal(); return; }
         if (cmd === "clear") { terminalBody.innerHTML = ""; return; }
-
         var lines = COMMANDS[cmd];
         if (lines) {
-            lines.forEach(function (l, i) {
-                addLine(l.text, l.cls, i * 60);
-            });
+            lines.forEach(function (l, i) { addLine(l.text, l.cls, i * 60); });
         } else {
             addLine(" Commande inconnue : '" + cmd + "'. Tape 'help'.", "red");
         }
@@ -367,48 +426,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (terminalInput) {
         terminalInput.addEventListener("keydown", function (e) {
-            if (e.key === "Enter") {
-                runCommand(terminalInput.value);
-                terminalInput.value = "";
-            }
-            if (e.key === "ArrowUp") {
-                cmdIndex = Math.min(cmdIndex + 1, cmdHistory.length - 1);
-                terminalInput.value = cmdHistory[cmdIndex] || "";
-            }
-            if (e.key === "ArrowDown") {
-                cmdIndex = Math.max(cmdIndex - 1, -1);
-                terminalInput.value = cmdIndex >= 0 ? cmdHistory[cmdIndex] : "";
-            }
+            if (e.key === "Enter") { runCommand(terminalInput.value); terminalInput.value = ""; }
+            if (e.key === "ArrowUp") { cmdIndex = Math.min(cmdIndex + 1, cmdHistory.length - 1); terminalInput.value = cmdHistory[cmdIndex] || ""; }
+            if (e.key === "ArrowDown") { cmdIndex = Math.max(cmdIndex - 1, -1); terminalInput.value = cmdIndex >= 0 ? cmdHistory[cmdIndex] : ""; }
         });
     }
 
-    // Ferme avec ESC, ouvre avec Ctrl+Shift+K
     document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") { closeTerminal(); return; }
-
-        if (e.ctrlKey && e.shiftKey && e.key === "K") {
-            e.preventDefault();
-            openTerminal();
-            return;
-        }
-
-        // Konami code
+        if (e.ctrlKey && e.shiftKey && e.key === "K") { e.preventDefault(); openTerminal(); return; }
         if (e.keyCode === KONAMI[konamiPos]) {
             konamiPos++;
-            if (konamiPos === KONAMI.length) {
-                konamiPos = 0;
-                openTerminal();
-            }
-        } else {
-            konamiPos = 0;
-        }
+            if (konamiPos === KONAMI.length) { konamiPos = 0; openTerminal(); }
+        } else { konamiPos = 0; }
     });
 
-    // Ferme en cliquant sur l'overlay (hors terminal)
     if (terminalOverlay) {
         terminalOverlay.addEventListener("click", function (e) {
             if (e.target === terminalOverlay) closeTerminal();
         });
     }
-});
 
+});

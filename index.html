@@ -17,7 +17,7 @@
 </head>
 
 <body>
-
+  <div id="scrollProgressBar"></div>
   <!-- ===== HEADER ===== -->
   <header class="header">
 
@@ -32,6 +32,7 @@
       <a href="#À_propos" class="location" data-fr="À PROPOS" data-en="ABOUT">À PROPOS</a>
       <a href="#Skills" class="location" data-fr="COMPÉTENCES" data-en="SKILLS">COMPÉTENCES</a>
       <a href="#Projets" class="location" data-fr="PROJETS" data-en="PROJECTS">PROJETS</a>
+      <a href="#Parcours" class="location" data-fr="PARCOURS" data-en="JOURNEY">PARCOURS</a>
       <a href="#Contact" class="location" data-fr="CONTACT" data-en="CONTACT">CONTACT</a>
     </nav>
 
@@ -51,7 +52,11 @@
     <div class="nav-drawer-inner">
       <a class="nav-drawer-link" href="#À_propos" data-fr="À propos" data-en="About">À propos <span
           class="arrow">→</span></a>
+      <a class="nav-drawer-link" href="#Skills" data-fr="Compétences" data-en="Skills">Compétences <span
+          class="arrow">→</span></a>
       <a class="nav-drawer-link" href="#Projets" data-fr="Projets" data-en="Projects">Projets <span
+          class="arrow">→</span></a>
+      <a class="nav-drawer-link" href="#Parcours" data-fr="Parcours" data-en="Journey">Parcours <span
           class="arrow">→</span></a>
       <a class="nav-drawer-link" href="#Contact" data-fr="Contact" data-en="Contact">Contact <span
           class="arrow">→</span></a>
@@ -67,8 +72,8 @@
   <aside class="side-nav" id="sideNav">
     <div class="side-nav-pill" id="sideNavPill"></div>
 
-    <!-- snBtn0 → À propos -->
-    <button class="side-nav-btn active" id="snBtn0" data-label="À propos" onclick="sideNavGoTo(0)">
+    <button class="side-nav-btn active" id="snBtn0" data-label-fr="À propos" data-label-en="About"
+      onclick="sideNavGoTo(0)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
         stroke-linejoin="round">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -76,8 +81,8 @@
       </svg>
     </button>
 
-    <!-- snBtn1 → Skills -->
-    <button class="side-nav-btn" id="snBtn1" data-label="Skills" onclick="sideNavGoTo(1)">
+    <button class="side-nav-btn" id="snBtn1" data-label-fr="Compétences" data-label-en="Skills"
+      onclick="sideNavGoTo(1)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
         stroke-linejoin="round">
         <polyline points="16 18 22 12 16 6" />
@@ -85,8 +90,7 @@
       </svg>
     </button>
 
-    <!-- snBtn2 → Projets -->
-    <button class="side-nav-btn" id="snBtn2" data-label="Projets" onclick="sideNavGoTo(2)">
+    <button class="side-nav-btn" id="snBtn2" data-label-fr="Projets" data-label-en="Projects" onclick="sideNavGoTo(2)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
         stroke-linejoin="round">
         <rect x="3" y="3" width="7" height="7" rx="1.2" />
@@ -96,8 +100,15 @@
       </svg>
     </button>
 
-    <!-- snBtn3 → Contact -->
-    <button class="side-nav-btn" id="snBtn3" data-label="Contact" onclick="sideNavGoTo(3)">
+    <button class="side-nav-btn" id="snBtn3" data-label-fr="Parcours" data-label-en="Journey" onclick="sideNavGoTo(3)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+        stroke-linejoin="round">
+        <line x1="12" y1="2" x2="12" y2="22" />
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+      </svg>
+    </button>
+
+    <button class="side-nav-btn" id="snBtn4" data-label="Contact" onclick="sideNavGoTo(4)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
         stroke-linejoin="round">
         <path
@@ -136,7 +147,7 @@
         </div>
 
         <div>
-          <p class="about-label" data-fr="Back-end & Frameworks" data-en="Back-end & Frameworks">Back-end & Frameworks
+          <p class="about-label" data-fr="Back-end" data-en="Back-end">Back-end
           </p>
           <div class="about-chips">
             <span class="about-chip b">Python</span>
@@ -148,7 +159,8 @@
         </div>
 
         <div>
-          <p class="about-label" data-fr="Front-end" data-en="Front-end">Front-end</p>
+          <p class="about-label" data-fr="Front-end & Frameworks" data-en="Front-end & Frameworks">Front-end &
+            Frameworks</p>
           <div class="about-chips">
             <span class="about-chip">HTML/CSS</span>
             <span class="about-chip">SCSS</span>
@@ -162,7 +174,6 @@
           <p class="about-label" data-fr="Intérêts" data-en="Interests">Intérêts</p>
           <div class="about-chips">
             <span class="about-chip sec">Cybersécurité</span>
-            <span class="about-chip sec">CTF</span>
           </div>
         </div>
 
@@ -208,7 +219,7 @@
             <div class="about-irow">
               <div class="about-iicon r"><ion-icon name="shield-half-outline"></ion-icon></div>
               <div class="about-itext">
-                <strong data-fr="Cybersécurité & CTF" data-en="Cybersecurity & CTF">Cybersécurité & CTF</strong>
+                <strong data-fr="Cybersécurité" data-en="Cybersecurity ">Cybersécurité</strong>
                 <span data-fr="Challenges offensifs, sécurité web, exploration des vulnérabilités"
                   data-en="Offensive challenges, web security, vulnerability exploration">Challenges offensifs, sécurité
                   web, exploration des vulnérabilités</span>
@@ -250,7 +261,7 @@
 
         <!-- HTML/CSS -->
         <div class="skill-card"
-          style="--skill-color:rgba(228,77,38,0.1);--skill-color-border:rgba(228,77,38,0.5);--skill-shadow:rgba(228,77,38,0.15);--skill-pct:90%">
+          style="--skill-color:rgba(228,77,38,0.1);--skill-color-border:rgba(228,77,38,0.5);--skill-shadow:rgba(228,77,38,0.15);--skill-pct:70%">
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 3L5.5 19L12 21L18.5 19L20 3H4Z" fill="#E44D26" opacity="0.9" />
@@ -266,7 +277,7 @@
 
         <!-- JavaScript -->
         <div class="skill-card"
-          style="--skill-color:rgba(247,223,30,0.1);--skill-color-border:rgba(247,223,30,0.5);--skill-shadow:rgba(247,223,30,0.15);--skill-pct:82%">
+          style="--skill-color:rgba(247,223,30,0.1);--skill-color-border:rgba(247,223,30,0.5);--skill-shadow:rgba(247,223,30,0.15);--skill-pct:65%">
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="24" height="24" rx="3" fill="#F7DF1E" />
@@ -286,7 +297,7 @@
 
         <!-- React -->
         <div class="skill-card"
-          style="--skill-color:rgba(97,218,251,0.1);--skill-color-border:rgba(97,218,251,0.5);--skill-shadow:rgba(97,218,251,0.15);--skill-pct:70%">
+          style="--skill-color:rgba(97,218,251,0.1);--skill-color-border:rgba(97,218,251,0.5);--skill-shadow:rgba(97,218,251,0.15);--skill-pct:60%">
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="12" cy="12" r="2" fill="#61DAFB" />
@@ -337,7 +348,7 @@
 
         <!-- PHP -->
         <div class="skill-card"
-          style="--skill-color:rgba(119,123,180,0.1);--skill-color-border:rgba(119,123,180,0.5);--skill-shadow:rgba(119,123,180,0.15);--skill-pct:78%">
+          style="--skill-color:rgba(119,123,180,0.1);--skill-color-border:rgba(119,123,180,0.5);--skill-shadow:rgba(119,123,180,0.15);--skill-pct:50%">
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <ellipse cx="12" cy="12" rx="10" ry="6" fill="#777BB4" opacity="0.15" stroke="#777BB4" stroke-width="1" />
@@ -353,7 +364,7 @@
 
         <!-- Symfony -->
         <div class="skill-card"
-          style="--skill-color:rgba(26,26,26,0.3);--skill-color-border:rgba(255,255,255,0.3);--skill-shadow:rgba(255,255,255,0.08);--skill-pct:72%">
+          style="--skill-color:rgba(26,26,26,0.3);--skill-color-border:rgba(255,255,255,0.3);--skill-shadow:rgba(255,255,255,0.08);--skill-pct:20%">
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z"
@@ -374,7 +385,7 @@
 
         <!-- Java -->
         <div class="skill-card"
-          style="--skill-color:rgba(237,117,30,0.1);--skill-color-border:rgba(237,117,30,0.5);--skill-shadow:rgba(237,117,30,0.15);--skill-pct:68%">
+          style="--skill-color:rgba(237,117,30,0.1);--skill-color-border:rgba(237,117,30,0.5);--skill-shadow:rgba(237,117,30,0.15);--skill-pct:60%">
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -402,7 +413,7 @@
 
         <!-- Ruby -->
         <div class="skill-card"
-          style="--skill-color:rgba(204,52,45,0.1);--skill-color-border:rgba(204,52,45,0.5);--skill-shadow:rgba(204,52,45,0.15);--skill-pct:60%">
+          style="--skill-color:rgba(204,52,45,0.1);--skill-color-border:rgba(204,52,45,0.5);--skill-shadow:rgba(204,52,45,0.15);--skill-pct:50%">
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M20.9 8.5L15.5 3.1L7 5.5L3 13.5L8.5 20.9L17 18.5L20.9 8.5Z" fill="#CC342D" opacity="0.9" />
@@ -433,7 +444,7 @@
 
         <!-- Cybersécurité -->
         <div class="skill-card"
-          style="--skill-color:rgba(255,77,109,0.1);--skill-color-border:rgba(255,77,109,0.5);--skill-shadow:rgba(255,77,109,0.15);--skill-pct:65%">
+          style="--skill-color:rgba(255,77,109,0.1);--skill-color-border:rgba(255,77,109,0.5);--skill-shadow:rgba(255,77,109,0.15);--skill-pct:45%">
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="#ff4d6d" stroke-width="1.5" stroke-linecap="round"
               stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
@@ -449,7 +460,7 @@
 
         <!-- Linux -->
         <div class="skill-card"
-          style="--skill-color:rgba(255,193,7,0.1);--skill-color-border:rgba(255,193,7,0.5);--skill-shadow:rgba(255,193,7,0.15);--skill-pct:75%">
+          style="--skill-color:rgba(255,193,7,0.1);--skill-color-border:rgba(255,193,7,0.5);--skill-shadow:rgba(255,193,7,0.15);--skill-pct:60%">
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -469,7 +480,7 @@
 
         <!-- Tailwind -->
         <div class="skill-card"
-          style="--skill-color:rgba(6,182,212,0.1);--skill-color-border:rgba(6,182,212,0.5);--skill-shadow:rgba(6,182,212,0.15);--skill-pct:74%">
+          style="--skill-color:rgba(6,182,212,0.1);--skill-color-border:rgba(6,182,212,0.5);--skill-shadow:rgba(6,182,212,0.15);--skill-pct:70%">
           <div class="skill-icon">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -511,11 +522,20 @@
               data-fr="Application web avec appel API qui permet de convertir une quantité d'argent en une autre devise que celle de son pays."
               data-en="Web application with API call that allows converting an amount of money into a currency other than that of one's country.">
               Application web avec appel API qui permet de convertir une quantité d'argent en une autre devise.</p>
-            <a target="_blank" href="https://convertisseur.clement-humez.fr/" class="card__cta">
-              <span class="card__cta-bg"></span>
-              <span class="card__cta-text" data-fr="Voir le projet" data-en="View project">Voir le projet</span>
-              <span class="card__cta-arrow">↗</span>
-            </a>
+            <div class="card__actions">
+              <a target="_blank" href="https://convertisseur.clement-humez.fr/" class="card__cta">
+                <span class="card__cta-bg"></span>
+                <span class="card__cta-text" data-fr="Voir le projet" data-en="View project">Voir le projet</span>
+                <span class="card__cta-arrow">↗</span>
+              </a>
+              <a class="card__cta-gh" href="https://github.com/Clement-Dev60/convertisseur" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
+                </svg>
+                GitHub
+              </a>
+            </div>
           </div>
         </article>
 
@@ -533,11 +553,20 @@
             <p class="card__desc" data-fr="Mini quiz sur les jeux-vidéos avec futur appel API."
               data-en="Mini quiz on video games with future API call.">Mini quiz sur les jeux-vidéos avec futur appel
               API.</p>
-            <a target="_blank" href="https://quiz.clement-humez.fr/" class="card__cta">
-              <span class="card__cta-bg"></span>
-              <span class="card__cta-text" data-fr="Voir le projet" data-en="View project">Voir le projet</span>
-              <span class="card__cta-arrow">↗</span>
-            </a>
+            <div class="card__actions">
+              <a target="_blank" href="https://quiz.clement-humez.fr/" class="card__cta">
+                <span class="card__cta-bg"></span>
+                <span class="card__cta-text" data-fr="Voir le projet" data-en="View project">Voir le projet</span>
+                <span class="card__cta-arrow">↗</span>
+              </a>
+              <a class="card__cta-gh" href="https://github.com/Clement-Dev60/quiz-video-games" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
+                </svg>
+                GitHub
+              </a>
+            </div>
           </div>
         </article>
 
@@ -553,11 +582,20 @@
             <h3 class="card__title" data-fr="Jeu 2048" data-en="2048 game">Jeu 2048</h3>
             <p class="card__desc" data-fr="Jeu 2048 version web uniquement." data-en="Game 2048 web version only.">Jeu
               2048 version web uniquement.</p>
-            <a target="_blank" href="https://2048.clement-humez.fr/" class="card__cta">
-              <span class="card__cta-bg"></span>
-              <span class="card__cta-text" data-fr="Voir le projet" data-en="View project">Voir le projet</span>
-              <span class="card__cta-arrow">↗</span>
-            </a>
+            <div class="card__actions">
+              <a target="_blank" href="https://2048.clement-humez.fr/" class="card__cta">
+                <span class="card__cta-bg"></span>
+                <span class="card__cta-text" data-fr="Voir le projet" data-en="View project">Voir le projet</span>
+                <span class="card__cta-arrow">↗</span>
+              </a>
+              <a class="card__cta-gh" href="https://github.com/Clement-Dev60/2048" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
+                </svg>
+                GitHub
+              </a>
+            </div>
           </div>
         </article>
 
@@ -568,7 +606,93 @@
       </div>
 
     </section>
+    <section class="parcours-section" id="Parcours">
 
+      <div class="parcours-header reveal">
+        <h2 class="parcours-title" data-fr="Parcours" data-en="Journey">Parcours</h2>
+      </div>
+
+      <div class="timeline">
+
+        <!-- Item 1 — Formation actuelle -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-date">2024-2027 — Présent</span>
+              <span class="timeline-badge formation" data-fr="Formation" data-en="Education">Formation</span>
+            </div>
+            <h3 class="timeline-title" data-fr="Bachelor Métiers Du Numérique"
+              data-en="Bachelor of Digital Professions"></h3>
+            <p class="timeline-place" data-fr="LaManu · Compiègne" data-en="LaManu · Compiègne"></p>
+            <p class="timeline-desc"
+              data-fr="Formation en développement d'applications et solutions logicielles. Spécialisation en développement web full-stack et initiation à la cybersécurité."
+              data-en="Training in application development and software solutions. Specialization in full-stack web development and introduction to cybersecurity.">
+              Formation en développement d'applications et solutions logicielles. Spécialisation en développement web
+              full-stack et initiation à la cybersécurité.
+            </p>
+            <div class="timeline-tags">
+              <span class="timeline-tag">PHP</span>
+              <span class="timeline-tag">Java</span>
+              <span class="timeline-tag">Python</span>
+              <span class="timeline-tag">SQL</span>
+              <span class="timeline-tag">Réseau</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 — Projet personnel -->
+        <div class="timeline-item">
+          <div class="timeline-dot pink"></div>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-date">2024-2026</span>
+              <span class="timeline-badge projet" data-fr="Projet" data-en="Project">Projet</span>
+            </div>
+            <h3 class="timeline-title" data-fr="Portfolio & Projets perso" data-en="Portfolio & Personal projects">
+              Portfolio & Projets perso</h3>
+            <p class="timeline-place" data-fr="Développement personnel" data-en="Personal development">Développement
+              personnel</p>
+            <p class="timeline-desc"
+              data-fr="Développement de projets web (convertisseur de devise, quiz jeux-vidéos, jeu 2048) et création de ce portfolio."
+              data-en="Development of web projects (currency converter, video game quiz, 2048 game) and creation of this portfolio.">
+            </p>
+            <div class="timeline-tags">
+              <span class="timeline-tag">HTML/CSS</span>
+              <span class="timeline-tag">JavaScript</span>
+              <span class="timeline-tag">React</span>
+              <span class="timeline-tag">API</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 — CTF / Cybersécurité -->
+        <div class="timeline-item">
+          <div class="timeline-dot cyan"></div>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-date">2024-2026 — Présent</span>
+              <span class="timeline-badge experience" data-fr="Pratique" data-en="Practice">Pratique</span>
+            </div>
+            <h3 class="timeline-title" data-fr="Cybersécurité" data-en="Cybersecurity">Cybersécurité</h3>
+            <p class="timeline-place">Root-Me · TryHackMe</p>
+            <p class="timeline-desc"
+              data-fr="Challenges offensifs et défensifs : web. Exploration des vulnérabilités et mécanismes de défense."
+              data-en="Offensive and defensive challenges: web. Exploration of vulnerabilities and defense mechanisms.">
+            </p>
+            <div class="timeline-tags">
+              <span class="timeline-tag">Web security</span>
+              <span class="timeline-tag">Forensics</span>
+              <span class="timeline-tag">Linux</span>
+              <span class="timeline-tag">CTF</span>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
   </main>
 
   <!-- ===================== FOOTER / CONTACT ===================== -->
