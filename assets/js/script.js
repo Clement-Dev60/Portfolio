@@ -297,7 +297,7 @@ document.addEventListener("DOMContentLoaded", function () {
             titleInterval = setInterval(function () {
                 document.title = titleToggle ? altTitle : originalTitle;
                 titleToggle = !titleToggle;
-            }, 2000);
+            }, 4000);
         } else {
             clearInterval(titleInterval);
             document.title = originalTitle;

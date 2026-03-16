@@ -847,7 +847,7 @@ body {
   border: 1px solid var(--card-border);
   overflow: hidden;
   cursor: pointer;
-  aspect-ratio: 4/3;
+  aspect-ratio: 4/3.3;
   outline: none;
   transition: border-color 0.4s var(--card-ease-expo), transform 0.4s var(--card-ease-expo);
 }
