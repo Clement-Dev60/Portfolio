@@ -1685,6 +1685,13 @@ body {
 	&--github:hover .contact-link__value {
 		color: #f0f0f5;
 	}
+	&--CV:hover .contact-link__value {
+		color: var(--card-accent-1);
+	}
+
+	&--CV--alternance:hover .contact-link__value {
+		color: var(--card-accent-3);
+	}
 }
 
 .contact-link__icon {
@@ -1715,6 +1722,12 @@ body {
 		background: rgba(255, 255, 255, 0.06);
 		ion-icon {
 			color: rgba(255, 255, 255, 0.7);
+		}
+	}
+	&.pdf {
+		background: rgba(232, 255, 87, 0.08);
+		ion-icon {
+			color: var(--card-accent-1);
 		}
 	}
 }
