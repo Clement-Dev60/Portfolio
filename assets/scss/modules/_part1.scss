@@ -906,7 +906,7 @@ body {
 	border: 1px solid var(--card-border);
 	overflow: hidden;
 	cursor: pointer;
-	aspect-ratio: 4/3.3;
+	aspect-ratio: 4/3.6;
 	outline: none;
 	transition: border-color 0.4s var(--card-ease-expo),
 		transform 0.4s var(--card-ease-expo);
@@ -2191,28 +2191,59 @@ body {
 
 	.card {
 		aspect-ratio: unset;
-		min-height: 320px;
+		min-height: unset; // plus de hauteur fixe
+		display: flex;
+		flex-direction: column;
 	}
+
+	.card__preview {
+		position: relative; // sort du absolute
+		width: 100%;
+		height: 200px; // hauteur fixe pour l'image
+		object-fit: cover;
+		transform: none;
+		filter: brightness(0.35) saturate(0.6);
+		flex-shrink: 0;
+	}
+
+	.card__body {
+		position: relative; // sort du absolute, suit le flux
+		bottom: unset;
+		left: unset;
+		right: unset;
+		transform: none;
+		padding: 20px;
+		background: var(--card-surface);
+	}
+
+	.card__gradient,
+	.card__shimmer {
+		display: none;
+	} // inutiles en statique
+
+	.card__tags {
+		position: absolute; // garde les tags sur l'image
+		top: 16px;
+		left: 16px;
+		transform: none;
+	}
+
+	.card__index {
+		position: absolute;
+		top: 16px;
+		right: 20px;
+		transform: none;
+	}
+
 	.card__desc {
-		max-height: 120px;
+		max-height: unset;
 		opacity: 1;
-		transform: translateY(0);
+		transform: none;
 	}
-	.card__cta {
-		opacity: 1;
-		transform: translateY(0) scale(1);
-	}
+
+	.card__cta,
 	.card__cta-gh {
 		opacity: 1;
-		transform: translateY(0) scale(1);
-	}
-	.card__preview {
-		transform: scale(1.05);
-		filter: brightness(0.35) saturate(0.6);
-	}
-	.card__tags,
-	.card__index,
-	.card__body {
 		transform: none;
 	}
 }
