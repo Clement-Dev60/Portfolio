@@ -156,12 +156,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---- SIDEBAR ----
 
-    var SN_IDS = ["À_propos", "Projets", "Skills", "Contact"];
-    var SN_COLORS = ["#e8ff57", "#00d9ff", "#ff4d6d", "#b87cff"];
+    var SN_IDS = ["À_propos", "Skills", "Projets", "Contact"];
+    var SN_COLORS = ["#e8ff57", "#ff4d6d", "#00d9ff", "#b87cff"];
     var SN_SHADOWS = [
         "rgba(232,255,87,0.5)",
-        "rgba(0,217,255,0.5)",
         "rgba(255,77,109,0.5)",
+        "rgba(0,217,255,0.5)",
         "rgba(184,124,255,0.5)"
     ];
 
@@ -213,27 +213,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     detectSection();
-
-    // ============================================================
-    // COLLE CE CODE À LA FIN DE TON DOMContentLoaded,
-    // juste avant le dernier }); de fermeture
-    // ============================================================
-
-
-    // ---- SIDEBAR — mettre à jour SN_IDS et snBtns ----
-    // Remplace dans ton script.js :
-    //
-    //   var SN_IDS = ["À_propos", "Projets", "Contact"];
-    // par :
-    //   var SN_IDS = ["À_propos", "Projets", "Skills", "Contact"];
-    //
-    // Et :
-    //   var snBtns = [0,1,2].map(...)
-    // par :
-    //   var snBtns = [0,1,2,3].map(...)
-
-
-    // ---- SKILLS — animation des barres au scroll ----
 
     var skillCards = document.querySelectorAll(".skill-card");
 

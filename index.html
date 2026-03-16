@@ -30,6 +30,7 @@
     <!-- Centre : liens de navigation -->
     <nav class="header-nav">
       <a href="#À_propos" class="location" data-fr="À PROPOS" data-en="ABOUT">À PROPOS</a>
+      <a href="#Skills" class="location" data-fr="COMPÉTENCES" data-en="SKILLS">COMPÉTENCES</a>
       <a href="#Projets" class="location" data-fr="PROJETS" data-en="PROJECTS">PROJETS</a>
       <a href="#Contact" class="location" data-fr="CONTACT" data-en="CONTACT">CONTACT</a>
     </nav>
@@ -62,7 +63,6 @@
   </div>
 
   <!-- ===== SIDEBAR DE NAVIGATION ===== -->
-  <!-- ===== SIDEBAR DE NAVIGATION — remplace ton <aside class="side-nav"> existant ===== -->
 
   <aside class="side-nav" id="sideNav">
     <div class="side-nav-pill" id="sideNavPill"></div>
@@ -76,23 +76,23 @@
       </svg>
     </button>
 
-    <!-- snBtn1 → Projets -->
-    <button class="side-nav-btn" id="snBtn1" data-label="Projets" onclick="sideNavGoTo(1)">
+    <!-- snBtn1 → Skills -->
+    <button class="side-nav-btn" id="snBtn1" data-label="Skills" onclick="sideNavGoTo(1)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+        stroke-linejoin="round">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    </button>
+
+    <!-- snBtn2 → Projets -->
+    <button class="side-nav-btn" id="snBtn2" data-label="Projets" onclick="sideNavGoTo(2)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
         stroke-linejoin="round">
         <rect x="3" y="3" width="7" height="7" rx="1.2" />
         <rect x="14" y="3" width="7" height="7" rx="1.2" />
         <rect x="3" y="14" width="7" height="7" rx="1.2" />
         <rect x="14" y="14" width="7" height="7" rx="1.2" />
-      </svg>
-    </button>
-
-    <!-- snBtn2 → Skills -->
-    <button class="side-nav-btn" id="snBtn2" data-label="Skills" onclick="sideNavGoTo(2)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-        stroke-linejoin="round">
-        <polyline points="16 18 22 12 16 6" />
-        <polyline points="8 6 2 12 8 18" />
       </svg>
     </button>
 
@@ -235,89 +235,6 @@
           </div>
         </div>
 
-      </div>
-
-    </section>
-
-    <!-- ===================== SECTION PROJETS ===================== -->
-    <section class="projects-section" id="Projets">
-
-      <div class="projects-header">
-        <h2 class="projects-title" data-fr="Mes Projets" data-en="My Projects">Mes Projets</h2>
-      </div>
-
-      <div class="cards-grid">
-
-        <article class="card card--1" tabindex="0">
-          <img class="card__preview" src="assets/images/preview-projet1.png" alt="Aperçu du projet 1" loading="lazy" />
-          <div class="card__gradient"></div>
-          <div class="card__shimmer"></div>
-          <div class="card__line"></div>
-          <div class="card__tags"><span class="card__tag">HTML/CSS</span><span class="card__tag">JS</span><span
-              class="card__tag">API</span></div>
-          <span class="card__index">01</span>
-          <div class="card__body">
-            <p class="card__category" data-fr="App desktop/mobile" data-en="Mobile/desktop App">App desktop/mobile</p>
-            <h3 class="card__title" data-fr="Convertisseur de devise" data-en="Currency converter">Convertisseur<br />de
-              devise</h3>
-            <p class="card__desc"
-              data-fr="Application web avec appel API qui permet de convertir une quantité d'argent en une autre devise que celle de son pays."
-              data-en="Web application with API call that allows converting an amount of money into a currency other than that of one's country.">
-              Application web avec appel API qui permet de convertir une quantité d'argent en une autre devise.</p>
-            <a target="_blank" href="https://convertisseur.clement-humez.fr/" class="card__cta">
-              <span class="card__cta-bg"></span>
-              <span class="card__cta-text" data-fr="Voir le projet" data-en="View project">Voir le projet</span>
-              <span class="card__cta-arrow">↗</span>
-            </a>
-          </div>
-        </article>
-
-        <article class="card card--2" tabindex="0">
-          <img class="card__preview" src="assets/images/preview-projet2.png" alt="Aperçu du projet 2" loading="lazy" />
-          <div class="card__gradient"></div>
-          <div class="card__shimmer"></div>
-          <div class="card__line"></div>
-          <div class="card__tags"><span class="card__tag">REACT</span><span class="card__tag">TailWind</span></div>
-          <span class="card__index">02</span>
-          <div class="card__body">
-            <p class="card__category" data-fr="App desktop" data-en="Desktop App">App desktop</p>
-            <h3 class="card__title" data-fr="Mini quiz Jeux-Vidéos" data-en="Video-games quiz">Mini quiz<br>Jeux-Vidéos
-            </h3>
-            <p class="card__desc" data-fr="Mini quiz sur les jeux-vidéos avec futur appel API."
-              data-en="Mini quiz on video games with future API call.">Mini quiz sur les jeux-vidéos avec futur appel
-              API.</p>
-            <a target="_blank" href="https://quiz.clement-humez.fr/" class="card__cta">
-              <span class="card__cta-bg"></span>
-              <span class="card__cta-text" data-fr="Voir le projet" data-en="View project">Voir le projet</span>
-              <span class="card__cta-arrow">↗</span>
-            </a>
-          </div>
-        </article>
-
-        <article class="card card--3" tabindex="0">
-          <img class="card__preview" src="assets/images/preview-projet3.png" alt="Aperçu du projet 3" loading="lazy" />
-          <div class="card__gradient"></div>
-          <div class="card__shimmer"></div>
-          <div class="card__line"></div>
-          <div class="card__tags"><span class="card__tag">HTML/CSS</span><span class="card__tag">JS</span></div>
-          <span class="card__index">03</span>
-          <div class="card__body">
-            <p class="card__category" data-fr="App desktop" data-en="Desktop App">App desktop</p>
-            <h3 class="card__title" data-fr="Jeu 2048" data-en="2048 game">Jeu 2048</h3>
-            <p class="card__desc" data-fr="Jeu 2048 version web uniquement." data-en="Game 2048 web version only.">Jeu
-              2048 version web uniquement.</p>
-            <a target="_blank" href="https://2048.clement-humez.fr/" class="card__cta">
-              <span class="card__cta-bg"></span>
-              <span class="card__cta-text" data-fr="Voir le projet" data-en="View project">Voir le projet</span>
-              <span class="card__cta-arrow">↗</span>
-            </a>
-          </div>
-        </article>
-
-      </div>
-
-      <div class="projects-more">
-        <button class="btn-more" data-fr="Plus de Projets" data-en="More Projects">Plus de Projets</button>
       </div>
 
     </section>
@@ -566,6 +483,88 @@
           </div>
         </div>
 
+      </div>
+
+    </section>
+    <!-- ===================== SECTION PROJETS ===================== -->
+    <section class="projects-section" id="Projets">
+
+      <div class="projects-header">
+        <h2 class="projects-title" data-fr="Mes Projets" data-en="My Projects">Mes Projets</h2>
+      </div>
+
+      <div class="cards-grid">
+
+        <article class="card card--1" tabindex="0">
+          <img class="card__preview" src="assets/images/preview-projet1.png" alt="Aperçu du projet 1" loading="lazy" />
+          <div class="card__gradient"></div>
+          <div class="card__shimmer"></div>
+          <div class="card__line"></div>
+          <div class="card__tags"><span class="card__tag">HTML/CSS</span><span class="card__tag">JS</span><span
+              class="card__tag">API</span></div>
+          <span class="card__index">01</span>
+          <div class="card__body">
+            <p class="card__category" data-fr="App desktop/mobile" data-en="Mobile/desktop App">App desktop/mobile</p>
+            <h3 class="card__title" data-fr="Convertisseur de devise" data-en="Currency converter">Convertisseur<br />de
+              devise</h3>
+            <p class="card__desc"
+              data-fr="Application web avec appel API qui permet de convertir une quantité d'argent en une autre devise que celle de son pays."
+              data-en="Web application with API call that allows converting an amount of money into a currency other than that of one's country.">
+              Application web avec appel API qui permet de convertir une quantité d'argent en une autre devise.</p>
+            <a target="_blank" href="https://convertisseur.clement-humez.fr/" class="card__cta">
+              <span class="card__cta-bg"></span>
+              <span class="card__cta-text" data-fr="Voir le projet" data-en="View project">Voir le projet</span>
+              <span class="card__cta-arrow">↗</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="card card--2" tabindex="0">
+          <img class="card__preview" src="assets/images/preview-projet2.png" alt="Aperçu du projet 2" loading="lazy" />
+          <div class="card__gradient"></div>
+          <div class="card__shimmer"></div>
+          <div class="card__line"></div>
+          <div class="card__tags"><span class="card__tag">REACT</span><span class="card__tag">TailWind</span></div>
+          <span class="card__index">02</span>
+          <div class="card__body">
+            <p class="card__category" data-fr="App desktop" data-en="Desktop App">App desktop</p>
+            <h3 class="card__title" data-fr="Mini quiz Jeux-Vidéos" data-en="Video-games quiz">Mini quiz<br>Jeux-Vidéos
+            </h3>
+            <p class="card__desc" data-fr="Mini quiz sur les jeux-vidéos avec futur appel API."
+              data-en="Mini quiz on video games with future API call.">Mini quiz sur les jeux-vidéos avec futur appel
+              API.</p>
+            <a target="_blank" href="https://quiz.clement-humez.fr/" class="card__cta">
+              <span class="card__cta-bg"></span>
+              <span class="card__cta-text" data-fr="Voir le projet" data-en="View project">Voir le projet</span>
+              <span class="card__cta-arrow">↗</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="card card--3" tabindex="0">
+          <img class="card__preview" src="assets/images/preview-projet3.png" alt="Aperçu du projet 3" loading="lazy" />
+          <div class="card__gradient"></div>
+          <div class="card__shimmer"></div>
+          <div class="card__line"></div>
+          <div class="card__tags"><span class="card__tag">HTML/CSS</span><span class="card__tag">JS</span></div>
+          <span class="card__index">03</span>
+          <div class="card__body">
+            <p class="card__category" data-fr="App desktop" data-en="Desktop App">App desktop</p>
+            <h3 class="card__title" data-fr="Jeu 2048" data-en="2048 game">Jeu 2048</h3>
+            <p class="card__desc" data-fr="Jeu 2048 version web uniquement." data-en="Game 2048 web version only.">Jeu
+              2048 version web uniquement.</p>
+            <a target="_blank" href="https://2048.clement-humez.fr/" class="card__cta">
+              <span class="card__cta-bg"></span>
+              <span class="card__cta-text" data-fr="Voir le projet" data-en="View project">Voir le projet</span>
+              <span class="card__cta-arrow">↗</span>
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="projects-more">
+        <button class="btn-more" data-fr="Plus de Projets" data-en="More Projects">Plus de Projets</button>
       </div>
 
     </section>

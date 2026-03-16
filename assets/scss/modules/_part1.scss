@@ -669,7 +669,7 @@ body {
 /* ============ PROJETS ============ */
 .projects-section {
 	min-height: 100vh;
-	padding: 80px 60px 80px calc(var(--sidenav-offset) + 40px);
+	padding: 10px 60px 80px calc(var(--sidenav-offset) + 40px);
 	background: var(--bg-color);
 	scroll-margin-top: 72px;
 }
@@ -1623,7 +1623,7 @@ body {
 /* ============ SECTION SKILLS ============ */
 .skills-section {
 	min-height: 100vh;
-	padding: 80px 60px 80px calc(var(--sidenav-offset) + 40px);
+	padding: 80px 60px 10px calc(var(--sidenav-offset) + 40px);
 	background: var(--bg-color);
 	scroll-margin-top: 72px;
 	display: flex;
