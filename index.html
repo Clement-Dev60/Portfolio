@@ -83,46 +83,24 @@
 
     <button class="side-nav-btn active" id="snBtn0" data-label-fr="À propos" data-label-en="About"
       onclick="sideNavGoTo(0)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-        stroke-linejoin="round">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-        <circle cx="12" cy="7" r="4" />
-      </svg>
+      <ion-icon name="person-outline"></ion-icon>
     </button>
 
     <button class="side-nav-btn" id="snBtn1" data-label-fr="Compétences" data-label-en="Skills"
       onclick="sideNavGoTo(1)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-        stroke-linejoin="round">
-        <polyline points="16 18 22 12 16 6" />
-        <polyline points="8 6 2 12 8 18" />
-      </svg>
+      <ion-icon name="code-outline"></ion-icon>
     </button>
 
     <button class="side-nav-btn" id="snBtn2" data-label-fr="Projets" data-label-en="Projects" onclick="sideNavGoTo(2)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-        stroke-linejoin="round">
-        <rect x="3" y="3" width="7" height="7" rx="1.2" />
-        <rect x="14" y="3" width="7" height="7" rx="1.2" />
-        <rect x="3" y="14" width="7" height="7" rx="1.2" />
-        <rect x="14" y="14" width="7" height="7" rx="1.2" />
-      </svg>
+      <ion-icon name="apps-outline"></ion-icon>
     </button>
 
     <button class="side-nav-btn" id="snBtn3" data-label-fr="Parcours" data-label-en="Journey" onclick="sideNavGoTo(3)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-        stroke-linejoin="round">
-        <line x1="12" y1="2" x2="12" y2="22" />
-        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-      </svg>
+      <ion-icon name="school-outline"></ion-icon>
     </button>
 
     <button class="side-nav-btn" id="snBtn4" data-label="Contact" onclick="sideNavGoTo(4)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
-        stroke-linejoin="round">
-        <path
-          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 13.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.81 2.5h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-      </svg>
+      <ion-icon name="call-outline"></ion-icon>
     </button>
   </aside>
 
@@ -338,10 +316,9 @@
         </div>
 
         <!-- Symfony — icône composant -->
-        <div class="skill-card"
-          style="--skill-color:rgba(255,255,255,0.05);--skill-color-border:rgba(255,255,255,0.3);--skill-shadow:rgba(255,255,255,0.08);--skill-pct:53%">
+        <div class="skill-card skill-card--neutral" style="--skill-pct:53%">
           <div class="skill-icon">
-            <ion-icon name="cube-outline" style="font-size:38px;color:rgba(255,255,255,0.75);"></ion-icon>
+            <ion-icon name="cube-outline" style="font-size:38px;"></ion-icon>
           </div>
           <span class="skill-name">Symfony</span>
           <div class="skill-level">

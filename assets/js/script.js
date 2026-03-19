@@ -56,6 +56,8 @@ document.addEventListener("DOMContentLoaded", function () {
             isDark = document.body.classList.toggle("dark");
             localStorage.setItem("darkMode", isDark);
             updateDarkModeIcon();
+            currentSection = -1;
+            detectSection();
         });
     }
 
@@ -160,7 +162,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // ---- SIDEBAR ----
 
     var SN_IDS = ["À_propos", "Skills", "Projets", "Parcours", "Contact"];
-    var SN_COLORS = ["#e8ff57", "#ff4d6d", "#00d9ff", "#e8ff57", "#b87cff"];
+    var SN_COLORS_DARK = ["#e8ff57", "#ff4d6d", "#00d9ff", "#e8ff57", "#b87cff"];
+    var SN_COLORS_LIGHT = ["#2a9d2a", "#cc2244", "#0099bb", "#2a9d2a", "#8844cc"];
+
     var SN_SHADOWS = [
         "rgba(232,255,87,0.5)",
         "rgba(255,77,109,0.5)",
@@ -174,26 +178,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var currentSection = -1;
 
+    function getSNColors() {
+        return document.body.classList.contains("dark") ? SN_COLORS_DARK : SN_COLORS_LIGHT;
+    }
+
     function sideNavSetActive(i) {
         if (i === currentSection) return;
         currentSection = i;
+        var colors = getSNColors();
 
         snBtns.forEach(function (btn, j) {
             if (!btn) return;
             btn.classList.toggle("active", j === i);
-            btn.style.color = j === i ? SN_COLORS[i] : "";
+            btn.style.color = j === i ? colors[i] : "";
         });
 
         if (!snNav || !snPill || !snBtns[i]) return;
         var navRect = snNav.getBoundingClientRect();
         var btnRect = snBtns[i].getBoundingClientRect();
         snPill.style.top = (btnRect.top - navRect.top + (btnRect.height - 28) / 2) + "px";
-        snPill.style.background = SN_COLORS[i];
+        snPill.style.background = colors[i];
         snPill.style.boxShadow = "0 0 10px 2px " + SN_SHADOWS[i];
 
         // Met à jour la barre de progression avec la couleur de la section
         var bar = document.getElementById("scrollProgressBar");
-        if (bar) bar.style.background = SN_COLORS[i];
+        if (bar) bar.style.background = colors[i];
     }
 
     function detectSection() {

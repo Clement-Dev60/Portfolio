@@ -9,30 +9,106 @@
 	--shine: rgba(0, 0, 0, 0.08) 50%;
 	--card-ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 	--card-ease-quart: cubic-bezier(0.76, 0, 0.24, 1);
-	--card-accent-1: #e8ff57;
+	--card-accent-1: rgb(50, 154, 58);
+	--card-accent-1-circle: rgb(50, 154, 58, 0.3);
+	--card-accent-1-badge: rgba(50, 154, 58, 0.25);
+	--card-accent-1-badge-bg: rgba(50, 154, 58, 0.06);
+	--card-accent-1-shadow: rgba(50, 154, 58, 0.2);
 	--card-accent-2: #ff4d6d;
 	--card-accent-3: #00d9ff;
+	--card-accent-3-circle: rgb(0, 217, 255, 0.3);
 	--card-accent-4: #b87cff;
-	--card-text-dim: rgba(255, 255, 255, 0.15);
-	--card-text-muted: rgba(255, 255, 255, 0.45);
-	--card-surface: #111118;
-	--card-border: rgba(255, 255, 255, 0.06);
+	--card-accent-4-circle: rgb(184, 124, 255, 0.3);
+	--card-text-dim: rgba(0, 0, 0, 0.685);
+	--card-text-muted: rgba(0, 0, 0, 0.45);
+	--card-surface: #ffffff;
+	--card-surface2: #f5f5f0;
+	--card-surface-hover: #d1d1d1;
+	--card-border: rgba(0, 0, 0, 0.2);
+	--card-border-hover: rgba(72, 72, 72, 0.38);
+	--card-tag: rgba(255, 255, 255, 0.45);
+	--card-index: rgba(255, 255, 255, 0.685);
+	--irow-bg: rgba(146, 146, 146, 0.015);
+	--irow-bg-hover: rgba(77, 77, 77, 0.104);
 	--card-font-mono: "DM Mono", monospace;
 	--card-font-display: "Syne", sans-serif;
 	--sidenav-offset: 76px;
+	--about-stat: #f4f4f4;
+	--about-stat-hover: #d7d7d7;
+	--chip-border: rgba(0, 0, 0, 0.45);
+	--strong-text: rgba(0, 0, 0, 0.45);
+	--sidenav-bg: #e6e6e6;
+	--stroke: rgba(83, 83, 83, 0.5);
+	--mail-bg: rgba(50, 154, 58, 0.08);
+	--github-text-color: #111118;
+	--sidenav-btn-color: rgba(0, 0, 0, 0.35);
+	--sidenav-btn-hover: rgba(0, 0, 0, 0.65);
+	--github-icon-color: rgba(0, 0, 0, 0.7);
+	--skill-level-color: rgba(25, 25, 25, 0.08);
 }
 
 body.dark {
 	--bg-color: #0d0d12;
 	--text-color: #f0f0f5;
 	--header-bg: rgba(13, 13, 18, 0.9);
-	--header-a: #e8ff57;
+	--header-a: rgb(232, 255, 87);
 	--button-bg: #1a1a24;
 	--button-txt: #f0f0f5;
 	--button-hover: rgba(255, 255, 255, 0.06);
 	--shine: rgba(255, 255, 255, 0.15) 50%;
+	--card-accent-1: rgb(232, 255, 87);
+	--card-accent-1-circle: rgb(232, 255, 87, 0.05);
+	--card-accent-1-badge: rgba(232, 255, 87, 0.25);
+	--card-accent-1-badge-bg: rgba(232, 255, 87, 0.06);
+	--card-accent-1-shadow: rgba(232, 255, 87, 0.2);
+	--card-accent-2: #ff4d6d;
+	--card-accent-3: #00d9ff;
+	--card-accent-3-circle: rgb(0, 217, 255, 0.05);
+	--card-accent-4: #b87cff;
+	--card-accent-4-circle: rgba(184, 124, 255, 0.07);
+	--card-text-dim: rgba(255, 255, 255, 0.15);
+	--card-text-muted: rgba(255, 255, 255, 0.45);
+	--card-surface: #111118;
+	--card-surface2: #111118;
+	--card-surface-hover: #1e1e2c;
+	--card-border: rgba(255, 255, 255, 0.06);
+	--card-border-hover: rgba(255, 255, 255, 0.14);
+	--irow-bg: rgba(255, 255, 255, 0.015);
+	--irow-bg-hover: rgba(255, 255, 255, 0.03);
+	--about-stat: #1a1a22;
+	--about-stat-hover: #1e1e2c;
+	--chip-border: rgba(255, 255, 255, 0.1);
+	--strong-text: #e0e0eb;
+	--sidenav-bg: #111118;
+	--stroke: rgba(255, 255, 255, 0.5);
+	--mail-bg: rgba(232, 255, 87, 0.08);
+	--github-text-color: #f0f0f5;
+	--sidenav-btn-color: rgba(255, 255, 255, 0.22);
+	--sidenav-btn-hover: rgba(255, 255, 255, 0.55);
+	--github-icon-color: rgba(255, 255, 255, 0.7);
+	--skill-level-color: rgba(255, 255, 255, 0.08);
+}
+/* Mode clair (par défaut) */
+.skill-card--neutral {
+	--skill-color: rgba(0, 0, 0, 0.04);
+	--skill-color-border: rgba(0, 0, 0, 0.25);
+	--skill-shadow: rgba(0, 0, 0, 0.08);
 }
 
+.skill-card--neutral .skill-icon {
+	color: rgba(0, 0, 0, 0.55);
+}
+
+/* Mode sombre */
+body.dark .skill-card--neutral {
+	--skill-color: rgba(255, 255, 255, 0.05);
+	--skill-color-border: rgba(255, 255, 255, 0.3);
+	--skill-shadow: rgba(255, 255, 255, 0.08);
+}
+
+body.dark .skill-card--neutral .skill-icon {
+	color: rgba(255, 255, 255, 0.75);
+}
 *,
 *::before,
 *::after {
@@ -180,8 +256,8 @@ body {
 }
 
 #langToggle {
-	background: var(--button-bg);
-	color: var(--button-txt);
+	background: transparent;
+	color: var(--text-color);
 	padding: 7px 10px;
 	border-radius: 8px;
 	border: 1px solid rgba(128, 128, 128, 0.3);
@@ -208,7 +284,7 @@ body {
 	align-items: center;
 	gap: 4px;
 	padding: 12px 0;
-	background: #111118;
+	background: var(--sidenav-bg);
 	border: 1px solid rgba(255, 255, 255, 0.08);
 	border-radius: 16px;
 	width: 48px;
@@ -237,20 +313,19 @@ body {
 	cursor: pointer;
 	border: none;
 	background: transparent;
-	color: rgba(255, 255, 255, 0.22);
+	color: var(--sidenav-btn-color);
 	transition: background 0.2s, color 0.25s;
 	padding: 0;
 	flex-shrink: 0;
 
-	svg {
-		width: 17px;
-		height: 17px;
+	& ion-icon {
+		font-size: 20px;
 		pointer-events: none;
 	}
 
 	&:hover {
 		background: rgba(255, 255, 255, 0.05);
-		color: rgba(255, 255, 255, 0.55);
+		color: var(--sidenav-btn-hover);
 	}
 
 	&.active {
@@ -321,7 +396,7 @@ body {
 		height: 260px;
 		background: radial-gradient(
 			circle,
-			rgba(232, 255, 87, 0.06) 0%,
+			var(--card-accent-1-circle) 0%,
 			transparent 70%
 		);
 		pointer-events: none;
@@ -356,7 +431,7 @@ body {
 		height: 200px;
 		background: radial-gradient(
 			circle,
-			rgba(0, 217, 255, 0.05) 0%,
+			var(--card-accent-3-circle) 0%,
 			transparent 70%
 		);
 		pointer-events: none;
@@ -409,9 +484,9 @@ body {
 	text-transform: uppercase;
 	padding: 5px 12px;
 	border-radius: 100px;
-	border: 1px solid rgba(232, 255, 87, 0.25);
+	border: 1px solid var(--card-accent-1-badge);
 	color: var(--card-accent-1);
-	background: rgba(232, 255, 87, 0.06);
+	background: var(--card-accent-1-badge-bg);
 	width: fit-content;
 	margin-bottom: 14px;
 }
@@ -441,7 +516,7 @@ body {
 	font-family: var(--card-font-display);
 	font-size: clamp(28px, 3vw, 36px);
 	font-weight: 800;
-	color: #f0f0f5;
+	color: var(--text-color);
 	letter-spacing: -0.03em;
 	line-height: 1.1;
 	margin: 0;
@@ -490,7 +565,7 @@ body {
 	letter-spacing: 0.2em;
 	text-transform: uppercase;
 	color: var(--card-text-dim);
-	-webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.5);
+	-webkit-text-stroke: 0.5px var(--stroke);
 	margin-bottom: 10px;
 	margin-top: 0;
 }
@@ -509,7 +584,7 @@ body {
 	text-transform: uppercase;
 	padding: 4px 11px;
 	border-radius: 100px;
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	border: 1px solid var(--chip-border);
 	color: var(--card-text-muted);
 	background: rgba(255, 255, 255, 0.03);
 	transition: border-color 0.25s, color 0.25s, background 0.25s;
@@ -568,14 +643,14 @@ body {
 }
 
 .about-stat {
-	background: #1a1a22;
+	background: var(--about-stat);
 	padding: 18px 14px;
 	text-align: center;
 	cursor: default;
 	transition: background 0.3s var(--card-ease-expo);
 
 	&:hover {
-		background: #1e1e2c;
+		background: var(--about-stat-hover);
 	}
 	&:first-child {
 		border-radius: 12px 0 0 12px;
@@ -625,13 +700,13 @@ body {
 	padding: 11px 15px;
 	border-radius: 10px;
 	border: 1px solid var(--card-border);
-	background: rgba(255, 255, 255, 0.015);
+	background: var(--irow-bg);
 	transition: border-color 0.3s, background 0.3s;
 	cursor: default;
 
 	&:hover {
-		border-color: rgba(255, 255, 255, 0.14);
-		background: rgba(255, 255, 255, 0.03);
+		border-color: var(--card-border-hover);
+		background: var(--irow-bg-hover);
 	}
 }
 
@@ -649,7 +724,7 @@ body {
 	}
 
 	&.y {
-		background: rgba(232, 255, 87, 0.08);
+		background: rgba(50, 154, 58, 0.08);
 		ion-icon {
 			color: var(--card-accent-1);
 		}
@@ -678,7 +753,7 @@ body {
 		font-family: var(--card-font-display);
 		font-size: 13px;
 		font-weight: 600;
-		color: #e0e0eb;
+		color: var(--strong-text);
 		display: block;
 		margin-bottom: 2px;
 	}
@@ -826,7 +901,7 @@ body {
 .skill-level {
 	width: 100%;
 	height: 2px;
-	background: rgba(255, 255, 255, 0.08);
+	background: var(--skill-level-color);
 	border-radius: 2px;
 	overflow: hidden;
 	position: relative;
@@ -938,7 +1013,6 @@ body {
 		position: absolute;
 		inset: 0;
 		width: 100%;
-		height: 100%;
 		object-fit: contain;
 		transform: scale(1.05);
 		transition: transform 0.8s var(--card-ease-expo), filter 0.5s ease;
@@ -1011,7 +1085,7 @@ body {
 		padding: 4px 10px;
 		border-radius: 100px;
 		border: 1px solid rgba(255, 255, 255, 0.1);
-		color: var(--card-text-muted);
+		color: var(--card-tag);
 		background: rgba(255, 255, 255, 0.04);
 		backdrop-filter: blur(8px);
 		transition: border-color 0.3s, color 0.3s;
@@ -1028,7 +1102,7 @@ body {
 		font-family: var(--card-font-mono);
 		font-size: 11px;
 		letter-spacing: 0.1em;
-		color: var(--card-text-dim);
+		color: var(--card-index);
 		z-index: 5;
 		transition: color 0.3s, transform 0.4s var(--card-ease-expo);
 		.card:hover & {
@@ -1088,7 +1162,7 @@ body {
 		font-family: var(--card-font-mono);
 		font-size: 12px;
 		line-height: 1.7;
-		color: var(--card-text-muted);
+		color: var(--card-tag);
 		max-height: 0;
 		overflow: hidden;
 		opacity: 0;
@@ -1301,7 +1375,7 @@ body {
 	font-size: clamp(32px, 4vw, 54px);
 	font-weight: 800;
 	letter-spacing: -0.03em;
-	color: #f0f0f5;
+	color: var(--text-color);
 	margin: 0;
 }
 
@@ -1357,7 +1431,7 @@ body {
 	border-radius: 50%;
 	background: var(--card-accent-1);
 	border: 2px solid var(--card-surface);
-	box-shadow: 0 0 0 3px rgba(232, 255, 87, 0.2);
+	box-shadow: 0 0 0 3px var(--card-accent-1-shadow);
 
 	&.cyan {
 		background: var(--card-accent-3);
@@ -1385,7 +1459,7 @@ body {
 	transition: border-color 0.3s, background 0.3s;
 
 	&:hover {
-		border-color: rgba(255, 255, 255, 0.12);
+		border-color: var(--card-border-hover);
 		background: rgba(255, 255, 255, 0.05);
 	}
 }
@@ -1417,8 +1491,8 @@ body {
 
 	&.formation {
 		color: var(--card-accent-1);
-		border-color: rgba(232, 255, 87, 0.3);
-		background: rgba(232, 255, 87, 0.06);
+		border-color: var(--card-accent-1-badge);
+		background: var(--card-accent-1-badge-bg);
 	}
 	&.experience {
 		color: var(--card-accent-3);
@@ -1436,7 +1510,7 @@ body {
 	font-family: var(--card-font-display);
 	font-size: 16px;
 	font-weight: 700;
-	color: #f0f0f5;
+	color: var(--strong-text);
 	margin: 0 0 4px;
 }
 
@@ -1469,7 +1543,7 @@ body {
 	text-transform: uppercase;
 	padding: 3px 9px;
 	border-radius: 100px;
-	border: 1px solid rgba(255, 255, 255, 0.08);
+	border: 1px solid var(--chip-border);
 	color: var(--card-text-muted);
 	background: rgba(255, 255, 255, 0.03);
 }
@@ -1507,7 +1581,7 @@ body {
 
 .contact-left,
 .contact-right {
-	background: #111118;
+	background: var(--card-surface2);
 	padding: 72px 60px;
 	display: flex;
 	flex-direction: column;
@@ -1536,7 +1610,7 @@ body {
 		height: 280px;
 		background: radial-gradient(
 			circle,
-			rgba(184, 124, 255, 0.07) 0%,
+			var(--card-accent-4-circle) 0%,
 			transparent 70%
 		);
 		pointer-events: none;
@@ -1557,7 +1631,7 @@ body {
 		height: 220px;
 		background: radial-gradient(
 			circle,
-			rgba(0, 217, 255, 0.05) 0%,
+			var(--card-accent-3-circle) 0%,
 			transparent 70%
 		);
 		pointer-events: none;
@@ -1574,7 +1648,7 @@ body {
 	letter-spacing: 0.2em;
 	text-transform: uppercase;
 	color: var(--card-text-dim);
-	-webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.4);
+	-webkit-text-stroke: 0.5px var(--stroke);
 	margin-bottom: 20px;
 	margin-top: 0;
 }
@@ -1585,7 +1659,7 @@ body {
 	font-weight: 800;
 	letter-spacing: -0.03em;
 	line-height: 1;
-	color: #f0f0f5;
+	color: var(--strong-text);
 	margin: 0 0 24px;
 
 	span {
@@ -1683,7 +1757,7 @@ body {
 		color: #0a66c2;
 	}
 	&--github:hover .contact-link__value {
-		color: #f0f0f5;
+		color: var(--github-text-color);
 	}
 	&--CV:hover .contact-link__value {
 		color: var(--card-accent-1);
@@ -1707,7 +1781,7 @@ body {
 		font-size: 20px;
 	}
 	&.mail {
-		background: rgba(232, 255, 87, 0.08);
+		background: var(--mail-bg);
 		ion-icon {
 			color: var(--card-accent-1);
 		}
@@ -1719,13 +1793,13 @@ body {
 		}
 	}
 	&.github {
-		background: rgba(255, 255, 255, 0.06);
+		background: var(--mail-bg);
 		ion-icon {
-			color: rgba(255, 255, 255, 0.7);
+			color: var(--github-icon-color);
 		}
 	}
 	&.pdf {
-		background: rgba(232, 255, 87, 0.08);
+		background: var(--mail-bg);
 		ion-icon {
 			color: var(--card-accent-1);
 		}
@@ -1743,7 +1817,7 @@ body {
 	letter-spacing: 0.15em;
 	text-transform: uppercase;
 	color: var(--card-text-dim);
-	-webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.4);
+	-webkit-text-stroke: 0.5px var(--stroke);
 	margin: 0 0 4px;
 }
 
@@ -1751,7 +1825,7 @@ body {
 	font-family: var(--card-font-display);
 	font-size: 14px;
 	font-weight: 600;
-	color: #e0e0eb;
+	color: var(--strong-text);
 	margin: 0;
 	white-space: nowrap;
 	overflow: hidden;
@@ -2262,5 +2336,8 @@ body {
 	}
 	.contact-title {
 		font-size: clamp(24px, 5vw, 50px);
+	}
+	.contact-copy {
+		margin-top: 10%;
 	}
 }
