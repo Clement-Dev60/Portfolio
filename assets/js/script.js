@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---- DARK MODE ----
 
-    var isDark = localStorage.getItem("darkMode") === "true";
+    var isDark = document.documentElement.classList.contains("dark");
     document.body.classList.toggle("dark", isDark);
 
     function updateDarkModeIcon() {
@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (toggle) {
         toggle.addEventListener("click", function () {
             isDark = document.body.classList.toggle("dark");
+            document.documentElement.classList.toggle("dark", isDark); // ← ligne ajoutée
             localStorage.setItem("darkMode", isDark);
             updateDarkModeIcon();
             currentSection = -1;
@@ -130,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
             setTimeout(function () {
                 popup.classList.remove("show");
                 setCookie("cookiePopupSeen", "true", 365);
-            }, 5500);
+            }, 15500);
         }
         closeBtn.addEventListener("click", function () {
             popup.classList.remove("show");

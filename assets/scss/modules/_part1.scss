@@ -45,9 +45,14 @@
 	--sidenav-btn-hover: rgba(0, 0, 0, 0.65);
 	--github-icon-color: rgba(0, 0, 0, 0.7);
 	--skill-level-color: rgba(25, 25, 25, 0.08);
+	--github-background-color: rgb(69, 69, 69);
+	--github-background-color-hover: rgb(33, 33, 33);
+	--skill-name-hover: #434343;
+	--cookie-bg: #dedee7;
 }
 
-body.dark {
+body.dark,
+html.dark body {
 	--bg-color: #0d0d12;
 	--text-color: #f0f0f5;
 	--header-bg: rgba(13, 13, 18, 0.9);
@@ -87,6 +92,8 @@ body.dark {
 	--sidenav-btn-hover: rgba(255, 255, 255, 0.55);
 	--github-icon-color: rgba(255, 255, 255, 0.7);
 	--skill-level-color: rgba(255, 255, 255, 0.08);
+	--skill-name-hover: #f0f0f5;
+	--cookie-bg: #1a1a24;
 }
 /* Mode clair (par défaut) */
 .skill-card--neutral {
@@ -865,7 +872,7 @@ body {
 		}
 
 		.skill-name {
-			color: #f0f0f5;
+			color: var(--skill-name-hover);
 		}
 	}
 }
@@ -1312,7 +1319,7 @@ body {
 }
 
 .card--1 {
-	@include card-theme(#e8ff57, #0a0a0f);
+	@include card-theme(var(--card-accent-1), #0a0a0f);
 }
 .card--2 {
 	@include card-theme(#ff4d6d, #fff);
@@ -1868,7 +1875,7 @@ body {
 	bottom: 20px;
 	left: 50%;
 	transform: translateX(-50%);
-	background: #1a1a24;
+	background: var(--cookie-bg);
 	border: 1px solid var(--card-border);
 	padding: 20px 30px;
 	border-radius: 12px;
@@ -2319,6 +2326,72 @@ body {
 	.card__cta-gh {
 		opacity: 1;
 		transform: none;
+	}
+	.card__title {
+		color: var(--text-color);
+	}
+
+	.card__desc {
+		color: var(--card-text-muted);
+		max-height: unset;
+		opacity: 1;
+		transform: none;
+	}
+
+	.card__tag {
+		border-color: rgba(179, 179, 179, 0.15);
+		color: rgba(255, 255, 255, 0.55);
+		background: rgba(196, 196, 196, 0.04);
+	}
+
+	.card__index {
+		color: rgba(0, 0, 0, 0.35);
+	}
+
+	.card__cta-gh {
+		border-color: rgba(0, 0, 0, 0.15);
+		color: rgba(0, 0, 0, 0.65);
+		background: rgba(0, 0, 0, 0.04);
+		opacity: 1;
+		transform: none;
+
+		&:hover {
+			border-color: rgba(0, 0, 0, 0.35);
+			color: var(--text-color);
+			background: rgba(0, 0, 0, 0.08);
+		}
+	}
+
+	/* ---- RESTAURATION DARK MODE ---- */
+
+	body.dark .card__title {
+		color: #f0f0f5;
+	}
+
+	body.dark .card__desc {
+		color: rgba(255, 255, 255, 0.45);
+	}
+
+	body.dark .card__tag {
+		border-color: rgba(255, 255, 255, 0.1);
+		color: rgba(255, 255, 255, 0.45);
+		background: rgba(255, 255, 255, 0.04);
+	}
+
+	body.dark .card__index {
+		color: rgba(255, 255, 255, 0.685);
+	}
+
+	body.dark .card__cta-gh {
+		border-color: rgba(255, 255, 255, 0.15);
+		color: rgba(255, 255, 255, 0.6);
+		background: rgba(255, 255, 255, 0.05);
+
+		&:hover {
+			border-color: rgba(255, 255, 255, 0.4);
+			color: #f0f0f5;
+			background: rgba(255, 255, 255, 0.1);
+		}
 	}
 }
 

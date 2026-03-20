@@ -3,6 +3,15 @@
 
 <head>
   <meta charset="UTF-8" />
+  <script>
+    (function () {
+      var stored = localStorage.getItem("darkMode");
+      var isDark = stored !== null
+        ? stored === "true"
+        : window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (isDark) document.documentElement.classList.add("dark");
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -748,7 +757,8 @@
   <div class="cookie-popup" id="cookiePopup" role="dialog" aria-describedby="cookieDesc">
     <div class="cookie-icon">🍪</div>
     <div class="cookie-content">
-      <p id="cookieDesc">Ce site utilise des cookies pour assurer son bon fonctionnement et améliorer votre expérience.
+      <p id="cookieDesc">Ce site utilise des cookies strictement nécessaires à son fonctionnement : mémorisation de la
+        langue choisie (FR/EN) et de vos préférences d'affichage. Aucune donnée n'est transmise à des tiers.
       </p>
     </div>
     <button class="close-btn" id="closeBtn" aria-label="Fermer">&times;</button>
