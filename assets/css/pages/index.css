@@ -1683,8 +1683,8 @@ body {
   transition: border-color 0.3s var(--card-ease-expo), background 0.3s var(--card-ease-expo), transform 0.3s var(--card-ease-expo);
 }
 .contact-link:hover {
-  border-color: rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--card-border-hover);
+  background: var(--irow-bg-hover);
   transform: translateX(4px);
 }
 .contact-link--mail:hover .contact-link__value {
@@ -1697,9 +1697,6 @@ body {
   color: var(--github-text-color);
 }
 .contact-link--CV:hover .contact-link__value {
-  color: var(--card-accent-1);
-}
-.contact-link--CV--alternance:hover .contact-link__value {
   color: var(--card-accent-3);
 }
 
@@ -2011,10 +2008,10 @@ body {
 .terminal {
   width: min(680px, 90vw);
   background: #0d0d12;
-  border: 1px solid rgba(232, 255, 87, 0.3);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 0 60px rgba(232, 255, 87, 0.1), 0 24px 80px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(0, 255, 65, 0.4);
+  box-shadow: 0 0 60px rgba(0, 255, 65, 0.08), 0 24px 80px rgba(0, 0, 0, 0.6);
   transform: translateY(20px) scale(0.97);
   transition: transform 0.35s var(--card-ease-expo);
 }
@@ -2066,7 +2063,7 @@ body {
 }
 
 .terminal-line {
-  color: #e8ff57;
+  color: #00ff41;
   margin: 0;
   opacity: 0;
   transform: translateY(4px);
@@ -2077,19 +2074,19 @@ body {
   transform: translateY(0);
 }
 .terminal-line.white {
-  color: rgba(255, 255, 255, 0.85);
+  color: #ccffcc;
 }
 .terminal-line.muted {
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(0, 255, 65, 0.35);
 }
 .terminal-line.green {
-  color: #00d9ff;
+  color: #00ff41;
 }
 .terminal-line.red {
   color: #ff4d6d;
 }
 .terminal-line.purple {
-  color: #b87cff;
+  color: #39ff14;
 }
 
 .terminal-input-row {
@@ -2100,7 +2097,26 @@ body {
 }
 
 .terminal-prompt {
-  color: #e8ff57;
+  color: #00ff41;
+}
+
+.terminal-input-wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.terminal-ghost {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--card-font-mono);
+  font-size: 13px;
+  color: rgba(0, 255, 65, 0.2);
+  pointer-events: none;
+  white-space: pre;
 }
 
 .terminal-input {
@@ -2109,8 +2125,8 @@ body {
   outline: none;
   font-family: var(--card-font-mono);
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.85);
-  caret-color: #e8ff57;
+  color: #00ff41;
+  caret-color: #00ff41;
   flex: 1;
 }
 

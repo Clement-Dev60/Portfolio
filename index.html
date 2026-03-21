@@ -730,16 +730,7 @@
             download="CV_HUMEZ_Clement">
             <div class="contact-link__icon pdf"><ion-icon name="document-outline"></ion-icon></div>
             <div class="contact-link__body">
-              <p class="contact-link__label">Télécharger CV</p>
-              <p class="contact-link__value">Clément Humez</p>
-            </div>
-            <span class="contact-link__arrow">↗</span>
-          </a>
-          <a class="contact-link contact-link--CV--alternance" href="assets/images/CV_HUMEZ_Clement_alternance.pdf"
-            download="CV_HUMEZ_Clement_alterance">
-            <div class="contact-link__icon pdf"><ion-icon name="document-outline"></ion-icon></div>
-            <div class="contact-link__body">
-              <p class="contact-link__label">Télécharger CV alternance</p>
+              <p class="contact-link__label" data-fr="Télécharger CV" data-en="Download CV">Télécharger CV</p>
               <p class="contact-link__value">Clément Humez</p>
             </div>
             <span class="contact-link__arrow">↗</span>
@@ -784,8 +775,11 @@
       <div style="position:relative; padding: 4px 24px 16px;">
         <div class="terminal-input-row">
           <span class="terminal-prompt">➜</span>
-          <input class="terminal-input" id="terminalInput" type="text" autocomplete="off" spellcheck="false"
-            placeholder="tape 'help'..." />
+          <div class="terminal-input-wrap">
+            <input class="terminal-input" id="terminalInput" type="text" autocomplete="off" spellcheck="false"
+              placeholder="tape 'help'..." />
+            <span class="terminal-ghost" id="terminalGhost"></span>
+          </div>
         </div>
         <span class="terminal-hint">ESC pour fermer</span>
       </div>

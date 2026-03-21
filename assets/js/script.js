@@ -328,18 +328,17 @@ document.addEventListener("DOMContentLoaded", function () {
     var konamiPos = 0;
 
     var INTRO_LINES = [
-        { text: "  \u2588\u2588\u2588\u2588\u2588\u2588\u2557\u2588\u2588\u2557      \u2588\u2588\u2588\u2588\u2588\u2557  \u2588\u2588\u2557  \u2588\u2588\u2557", cls: "purple" },
-        { text: " \u2588\u2588\u2554\u2550\u2550\u2550\u2550\u255d\u2588\u2588\u2551     \u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2557 \u2588\u2588\u2551 \u2588\u2588\u2554\u255d", cls: "purple" },
-        { text: " \u2588\u2588\u2551     \u2588\u2588\u2551     \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2551 \u2588\u2588\u2588\u2588\u2588\u2554\u2557 ", cls: "purple" },
-        { text: " \u2588\u2588\u2551     \u2588\u2588\u2551     \u2588\u2588\u2554\u2550\u2550\u2588\u2588\u2551 \u2588\u2588\u2554\u2550\u2588\u2588\u2557 ", cls: "purple" },
-        { text: " \u255a\u2588\u2588\u2588\u2588\u2588\u2588\u2557\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2557\u2588\u2588\u2551  \u2588\u2588\u2551 \u2588\u2588\u2551  \u2588\u2588\u2557", cls: "purple" },
-        { text: "  \u255a\u2550\u2550\u2550\u2550\u2550\u255d\u255a\u2550\u2550\u2550\u2550\u2550\u2550\u255d\u255a\u2550\u255d  \u255a\u2550\u255d \u255a\u2550\u255d  \u255a\u2550\u255d", cls: "purple" },
         { text: "", cls: "muted" },
-        { text: " Clément Humez — Portfolio v2.0.0", cls: "white" },
-        { text: " Développeur Junior · Cybersécurité", cls: "muted" },
+        { text: "  CLÉMENT HUMEZ", cls: "purple" },
+        { text: "  ───────────────────────", cls: "purple" },
+        { text: "  Développeur Junior", cls: "white" },
+        { text: "  Cybersécurité & CTF", cls: "white" },
+        { text: "  ───────────────────────", cls: "purple" },
         { text: "", cls: "muted" },
-        { text: " Tu as trouvé l'easter egg \uD83C\uDF89", cls: "green" },
-        { text: " Tape 'help' pour voir les commandes.", cls: "muted" },
+        { text: "  Portfolio v2.0.0 — France \uD83C\uDDEB\uD83C\uDDF7", cls: "muted" },
+        { text: "", cls: "muted" },
+        { text: "  \uD83C\uDF89 Tu as trouvé l'easter egg !", cls: "green" },
+        { text: "  Tape 'help' pour voir les commandes.", cls: "muted" },
         { text: "", cls: "muted" },
     ];
 
@@ -363,13 +362,18 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
         skills: [
             { text: " Stack technique :", cls: "white" },
-            { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591] HTML/CSS    90%", cls: "green" },
-            { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591] Python     85%", cls: "green" },
-            { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591] JavaScript 82%", cls: "green" },
-            { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591] PHP/Symfony 78%", cls: "green" },
-            { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591] React      70%", cls: "green" },
-            { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591] Java       68%", cls: "green" },
-            { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591] CTF/Secu   65%", cls: "red" },
+            { text: "  [████████░░] Git         88%", cls: "green" },
+            { text: "  [████████░░] Python      85%", cls: "green" },
+            { text: "  [███████░░░] HTML/CSS    72%", cls: "green" },
+            { text: "  [███████░░░] Tailwind    70%", cls: "green" },
+            { text: "  [██████░░░░] JavaScript  65%", cls: "green" },
+            { text: "  [██████░░░░] React       60%", cls: "green" },
+            { text: "  [██████░░░░] Java        60%", cls: "green" },
+            { text: "  [█████░░░░░] PHP         57%", cls: "green" },
+            { text: "  [█████░░░░░] Cybersec    55%", cls: "red" },
+            { text: "  [█████░░░░░] Linux       54%", cls: "green" },
+            { text: "  [█████░░░░░] Symfony     53%", cls: "green" },
+            { text: "  [████░░░░░░] Ruby        45%", cls: "green" },
         ],
         ctf: [
             { text: " CTF & Cybersécurité :", cls: "white" },
@@ -386,7 +390,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
         matrix: [
             { text: " Wake up, Neo...", cls: "green" },
-            { text: " The Matrix has you.", cls: "green" },
+            { text: " The Matrix has you...", cls: "green" },
             { text: " Follow the white rabbit. \uD83D\uDC07", cls: "green" },
         ],
         exit: null,
@@ -435,10 +439,60 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (terminalInput) {
+
+        var ghost = document.getElementById("terminalGhost");
+
+        terminalInput.addEventListener("input", function () {
+            var val = terminalInput.value.trim().toLowerCase();
+            if (!val) { ghost.textContent = ""; return; }
+
+            var commands = Object.keys(COMMANDS);
+            var match = commands.find(function (cmd) { return cmd.startsWith(val); });
+
+            if (match && match !== val) {
+                ghost.textContent = terminalInput.value + match.slice(val.length);
+            } else {
+                ghost.textContent = "";
+            }
+        });
+
         terminalInput.addEventListener("keydown", function (e) {
-            if (e.key === "Enter") { runCommand(terminalInput.value); terminalInput.value = ""; }
-            if (e.key === "ArrowUp") { cmdIndex = Math.min(cmdIndex + 1, cmdHistory.length - 1); terminalInput.value = cmdHistory[cmdIndex] || ""; }
-            if (e.key === "ArrowDown") { cmdIndex = Math.max(cmdIndex - 1, -1); terminalInput.value = cmdIndex >= 0 ? cmdHistory[cmdIndex] : ""; }
+
+            if (e.key === "Tab") {
+                e.preventDefault();
+                var input = terminalInput.value.trim().toLowerCase();
+                if (!input) return;
+
+                var commands = Object.keys(COMMANDS);
+                var matches = commands.filter(function (cmd) { return cmd.startsWith(input); });
+
+                if (matches.length === 1) {
+                    terminalInput.value = matches[0];
+                    ghost.textContent = "";
+                } else if (matches.length > 1) {
+                    addLine("➜  " + input, "");
+                    addLine("  " + matches.join("   "), "muted");
+                    addLine("", "muted");
+                    ghost.textContent = "";
+                }
+                return;
+            }
+
+            if (e.key === "Enter") {
+                ghost.textContent = "";
+                runCommand(terminalInput.value);
+                terminalInput.value = "";
+            }
+            if (e.key === "ArrowUp") {
+                cmdIndex = Math.min(cmdIndex + 1, cmdHistory.length - 1);
+                terminalInput.value = cmdHistory[cmdIndex] || "";
+                ghost.textContent = "";
+            }
+            if (e.key === "ArrowDown") {
+                cmdIndex = Math.max(cmdIndex - 1, -1);
+                terminalInput.value = cmdIndex >= 0 ? cmdHistory[cmdIndex] : "";
+                ghost.textContent = "";
+            }
         });
     }
 
