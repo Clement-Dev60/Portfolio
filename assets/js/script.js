@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // ---- FONDU DES LIENS NAV ----
 
     document.querySelectorAll(".header-nav a").forEach(function (el, i) {
-        setTimeout(function () { el.classList.add("visible"); }, 800 + i * 200);
+        setTimeout(function () { el.classList.add("visible"); }, 1300 + i * 400);
     });
 
     // ---- COOKIE POPUP ----
@@ -250,7 +250,6 @@ document.addEventListener("DOMContentLoaded", function () {
     updateScrollBar();
 
     // ---- ANIMATIONS AU SCROLL (feature 4) ----
-    // Tous les éléments avec .reveal apparaissent en glissant vers le haut
 
     if ("IntersectionObserver" in window) {
         var revealObserver = new IntersectionObserver(function (entries) {
@@ -510,5 +509,170 @@ document.addEventListener("DOMContentLoaded", function () {
             if (e.target === terminalOverlay) closeTerminal();
         });
     }
+    var brushCanvas = document.getElementById("brushCanvas");
 
+    if (brushCanvas) {
+        var brushMedia = brushCanvas.previousElementSibling;
+        var brushHint = document.getElementById("brushHint");
+        var ctx = brushCanvas.getContext("2d");
+        var isPainting = false;
+        var hasStarted = false;
+        var BRUSH_SIZE = 60;
+
+        function brushInit() {
+            brushCanvas.width = brushCanvas.offsetWidth;
+            brushCanvas.height = brushCanvas.offsetHeight;
+            ctx.fillStyle = "#111118";
+            ctx.fillRect(0, 0, brushCanvas.width, brushCanvas.height);
+            ctx.font = "500 14px 'DM Mono', monospace";
+            ctx.fillStyle = "rgba(255,255,255,0.06)";
+            ctx.textAlign = "center";
+            ctx.fillText("// gratte pour révéler", brushCanvas.width / 2, brushCanvas.height / 2);
+            hasStarted = false;
+            if (brushHint) brushHint.classList.remove("hidden");
+        }
+
+        function checkRevealComplete() {
+            var pixels = ctx.getImageData(0, 0, brushCanvas.width, brushCanvas.height).data;
+            var transparent = 0;
+            for (var i = 3; i < pixels.length; i += 4) {
+                if (pixels[i] < 128) transparent++;
+            }
+            var pct = transparent / (pixels.length / 4);
+            if (pct > 0.6) {
+                ctx.clearRect(0, 0, brushCanvas.width, brushCanvas.height);
+            }
+        }
+
+        function brushAt(x, y) {
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.beginPath();
+            ctx.arc(x, y, BRUSH_SIZE, 0, Math.PI * 2);
+            ctx.fill();
+            if (!hasStarted) {
+                hasStarted = true;
+                if (brushHint) brushHint.classList.add("hidden");
+            }
+            checkRevealComplete()
+        }
+
+        function getPos(e) {
+            var rect = brushCanvas.getBoundingClientRect();
+            var scaleX = brushCanvas.width / rect.width;
+            var scaleY = brushCanvas.height / rect.height;
+            var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
+        }
+
+        brushCanvas.addEventListener("mousedown", function (e) { isPainting = true; brushAt(getPos(e).x, getPos(e).y); });
+        brushCanvas.addEventListener("mousemove", function (e) { if (isPainting) brushAt(getPos(e).x, getPos(e).y); });
+        brushCanvas.addEventListener("mouseup", function () { isPainting = false; });
+        brushCanvas.addEventListener("mouseleave", function () { isPainting = false; });
+        brushCanvas.addEventListener("touchstart", function (e) { e.preventDefault(); isPainting = true; brushAt(getPos(e).x, getPos(e).y); }, { passive: false });
+        brushCanvas.addEventListener("touchmove", function (e) { e.preventDefault(); if (isPainting) brushAt(getPos(e).x, getPos(e).y); }, { passive: false });
+        brushCanvas.addEventListener("touchend", function () { isPainting = false; });
+
+        window.brushReset = function () { brushInit(); };
+
+        window.addEventListener("load", brushInit);
+        window.addEventListener("resize", brushInit);
+        setTimeout(brushInit, 300);
+    }
+
+    // ---- SCRAMBLE TEXT ----
+
+    var CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&";
+
+    function scrambleText(el) {
+        var target = el.textContent.trim();
+        var len = target.length;
+        var revealed = 0;
+        var frame = 0;
+        var SPEED = 2;
+        var NOISE = 8;
+
+        el.dataset.scrambling = "true";
+
+        var interval = setInterval(function () {
+            var result = "";
+            frame++;
+
+            while (revealed < len && target[revealed] === " ") {
+                revealed++;
+            }
+
+            for (var i = 0; i < len; i++) {
+                if (target[i] === " ") {
+                    result += " ";
+                } else if (i < revealed) {
+                    result += target[i];
+                } else if (i === revealed) {
+                    var noiseFrame = frame - (revealed * SPEED);
+                    if (noiseFrame >= NOISE) {
+                        revealed++;
+                        while (revealed < len && target[revealed] === " ") {
+                            revealed++;
+                        }
+                        result += target[i];
+                    } else {
+                        result += CHARS[Math.floor(Math.random() * CHARS.length)];
+                    }
+                } else {
+                    result += CHARS[Math.floor(Math.random() * CHARS.length)];
+                }
+            }
+
+            el.textContent = result;
+
+            if (revealed >= len) {
+                el.textContent = target;
+                el.dataset.scrambling = "false";
+                clearInterval(interval);
+            }
+        }, 30);
+    }
+
+    if ("IntersectionObserver" in window) {
+        var scrambleObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    var el = entry.target;
+                    if (el.dataset.scrambling !== "true") {
+                        scrambleText(el);
+                    }
+                    scrambleObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll("[data-scramble]").forEach(function (el) {
+            scrambleObserver.observe(el);
+        });
+    }
+
+    document.querySelectorAll(".side-nav-btn").forEach(function (btn) {
+        btn.addEventListener("mouseenter", function () {
+            var label = btn.dataset.labelFr || btn.dataset.label || "";
+            if (!label) return;
+            var tooltip = btn.querySelector("::after");
+            var original = label;
+            var i = 0;
+            var scramInterval = setInterval(function () {
+                var result = "";
+                for (var c = 0; c < original.length; c++) {
+                    if (original[c] === " ") { result += " "; continue; }
+                    result += c < i
+                        ? original[c]
+                        : CHARS[Math.floor(Math.random() * CHARS.length)];
+                }
+                btn.setAttribute("data-label", result);
+                i++;
+                if (i > original.length) {
+                    btn.setAttribute("data-label", original);
+                    clearInterval(scramInterval);
+                }
+            }, 40);
+        });
+    });
 });
