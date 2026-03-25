@@ -67,9 +67,14 @@ document.addEventListener("DOMContentLoaded", function () {
     var currentLang = getCookie("lang") || "fr";
     document.documentElement.lang = currentLang;
 
+    const FLAG_FR = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 60" width="20" height="13" style="vertical-align:middle;margin-right:4px"><rect width="30" height="60" fill="#002395"/><rect x="30" width="30" height="60" fill="#EDEDED"/><rect x="60" width="30" height="60" fill="#ED2939"/></svg>`;
+    const FLAG_EN = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="20" height="13" style="vertical-align:middle;margin-right:4px"><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></svg>`;
+
     function updateLangButton() {
         if (!langToggle) return;
-        langToggle.textContent = currentLang === "fr" ? "\uD83C\uDDEB\uD83C\uDDF7 FR" : "\uD83C\uDDEC\uD83C\uDDE7 EN";
+        langToggle.innerHTML = currentLang === "fr"
+            ? `${FLAG_FR} FR`
+            : `${FLAG_EN} EN`;
         syncMobileButtons();
     }
 
@@ -207,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const trigger = window.scrollY + window.innerHeight * 0.55;
 
         var active = 0;
-        
+
         snTargets.forEach(function (el, i) {
             const top = el.offsetTop;
             const bottom = top + el.offsetHeight;
