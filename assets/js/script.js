@@ -163,14 +163,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // ---- SIDEBAR ----
 
     var SN_IDS = ["À_propos", "Skills", "Projets", "Parcours", "Contact"];
-    var SN_COLORS_DARK = ["#e8ff57", "#ff4d6d", "#00d9ff", "#e8ff57", "#b87cff"];
-    var SN_COLORS_LIGHT = ["#2a9d2a", "#cc2244", "#0099bb", "#2a9d2a", "#8844cc"];
+    var SN_COLORS_DARK = ["#e8ff57", "#ff4d6d", "#00d9ff", "#ff009d", "#b87cff"];
+    var SN_COLORS_LIGHT = ["#2a9d2a", "#cc2244", "#0099bb", "#981666", "#8844cc"];
 
     var SN_SHADOWS = [
         "rgba(232,255,87,0.5)",
         "rgba(255,77,109,0.5)",
         "rgba(0,217,255,0.5)",
-        "rgba(232,255,87,0.5)",
+        "rgba(255, 0, 157, 0.5)",
         "rgba(184,124,255,0.5)"
     ];
 
