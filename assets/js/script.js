@@ -86,6 +86,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 ? "Let's work<br><span>together.</span>"
                 : "Travaillons<br><span>ensemble.</span>";
         }
+        var aboutBio = document.getElementById("about-bio");
+        if (aboutBio) {
+            aboutBio.innerHTML = currentLang === "en"
+                ? "Junior <strong>full-stack</strong> developer with a solid grasp of both front-end and back-end environments. Comfortable across multiple languages — from <strong>JavaScript</strong> to <strong>Python</strong>, including <strong>Java</strong> and <strong>PHP/Symfony</strong> — I enjoy building robust applications as much as clean interfaces.<br><br>Passionate about <strong>cybersecurity</strong>, I actively explore attack and defense strategies, and am looking to deepen my expertise in this field through an <strong>apprenticeship or internship</strong>."
+                : "Développeur junior <strong>full-stack</strong> avec une bonne maîtrise des environnements front et back. À l'aise sur plusieurs langages — de <strong>JavaScript</strong> à <strong>Python</strong> en passant par<strong>Java</strong> et <strong>PHP/Symfony</strong> — j'aime construire des applications robustes autantque des interfaces propres.<br><br>Passionné par la <strong>cybersécurité</strong>, je m'intéresse activement aux logiques d'attaque et dedéfense, et cherche à approfondir ce domaine dans le cadre d'une <strong>alternance ou d'un stage</strong>.";
+        }
 
     }
 
@@ -139,27 +145,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // ---- BURGER MENU MOBILE ----
-
-    if (burgerBtn && navDrawer) {
-        burgerBtn.addEventListener("click", function () {
-            burgerBtn.classList.toggle("open");
-            navDrawer.classList.toggle("open");
-        });
-
-        navDrawer.querySelectorAll(".nav-drawer-link").forEach(function (link) {
-            link.addEventListener("click", function () {
-                burgerBtn.classList.remove("open");
-                navDrawer.classList.remove("open");
-            });
-        });
-    }
-
-    if (darkMobileBtn) darkMobileBtn.addEventListener("click", function () { if (toggle) toggle.click(); });
-    if (langMobileBtn) langMobileBtn.addEventListener("click", function () { if (langToggle) langToggle.click(); });
-
-    syncMobileButtons();
-
     // ---- SIDEBAR ----
 
     var SN_IDS = ["À_propos", "Skills", "Projets", "Parcours", "Contact"];
@@ -197,7 +182,17 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!snNav || !snPill || !snBtns[i]) return;
         var navRect = snNav.getBoundingClientRect();
         var btnRect = snBtns[i].getBoundingClientRect();
-        snPill.style.top = (btnRect.top - navRect.top + (btnRect.height - 28) / 2) + "px";
+
+        if (window.innerWidth <= 1024) {
+            snPill.style.top = "unset";
+            snPill.style.left = (btnRect.left - navRect.left + (btnRect.width - 28) / 2) + "px";
+            snPill.style.bottom = "0px";
+        } else {
+            snPill.style.left = "0";
+            snPill.style.bottom = "unset";
+            snPill.style.top = (btnRect.top - navRect.top + (btnRect.height - 28) / 2) + "px";
+        }
+
         snPill.style.background = colors[i];
         snPill.style.boxShadow = "0 0 10px 2px " + SN_SHADOWS[i];
 
@@ -207,11 +202,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function detectSection() {
-        var trigger = window.scrollY + window.innerHeight * 0.30;
+        const scrollBottom = window.innerHeight + window.scrollY;
+        const docHeight = document.body.offsetHeight;
+        const trigger = window.scrollY + window.innerHeight * 0.55;
+
         var active = 0;
+        
         snTargets.forEach(function (el, i) {
-            if (el.offsetTop <= trigger) active = i;
+            const top = el.offsetTop;
+            const bottom = top + el.offsetHeight;
+
+            if (trigger >= top && trigger < bottom) {
+                active = i;
+            }
         });
+
+        if (scrollBottom >= docHeight - 2) {
+            active = snTargets.length - 1;
+        }
         sideNavSetActive(active);
     }
 
