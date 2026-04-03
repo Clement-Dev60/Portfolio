@@ -171,11 +171,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 ? "Junior <strong>full-stack</strong> developer with a solid grasp of both front-end and back-end environments. Comfortable across multiple languages — from <strong>JavaScript</strong> to <strong>Python</strong>, including <strong>Java</strong> and <strong>PHP/Symfony</strong> — I enjoy building robust applications as much as clean interfaces.<br><br>Passionate about <strong>cybersecurity</strong>, I actively explore attack and defense strategies, and am looking to deepen my expertise in this field through an <strong>apprenticeship or internship</strong>."
                 : "Développeur junior <strong>full-stack</strong> avec une bonne maîtrise des environnements front et back. À l'aise sur plusieurs langages — de <strong>JavaScript</strong> à <strong>Python</strong> en passant par <strong>Java</strong> et <strong>PHP/Symfony</strong> — j'aime construire des applications robustes autant que des interfaces propres.<br><br>Passionné par la <strong>cybersécurité</strong>, je m'intéresse activement aux logiques d'attaque et de défense, et cherche à approfondir ce domaine dans le cadre d'une <strong>alternance ou d'un stage</strong>.";
         }
-        var displayContent = document.getElementById("display-content");
-        if (displayContent) {
-            displayContent.innerHTML = currentLang === "en"
-                ? '<p id="displayDesc">Choose a view</p> <h2> How do you want <br> to explore ?</h2>'
-                : '<p id="displayDesc">Choisir un affichage</p> <h2> Comment veux - tu <br> explorer ?</h2>';
+        var displayDesc = document.getElementById("displayDesc");
+        if (displayDesc) {
+            displayDesc.innerHTML = currentLang === "en"
+                ? "Choose a view"
+                : "Choisir un affichage";
+        }
+        var displayDescTitle = document.getElementById("displayDescTitle");
+        if (displayDescTitle) {
+            displayDescTitle.innerHTML = currentLang === "en"
+                ? "How do you want <br> to explore ?"
+                : "Comment veux - tu <br> explorer ?";
         }
 
     }
