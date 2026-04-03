@@ -596,7 +596,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var val = terminalInput.value.trim().toLowerCase();
             if (!val) { ghost.textContent = ""; return; }
 
-            var commands = Object.keys(COMMANDS);
+            var commands = Object.keys(getCommands());
             var match = commands.find(function (cmd) { return cmd.startsWith(val); });
 
             if (match && match !== val) {
@@ -613,7 +613,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 var input = terminalInput.value.trim().toLowerCase();
                 if (!input) return;
 
-                var commands = Object.keys(COMMANDS);
+                var commands = Object.keys(getCommands());
                 var matches = commands.filter(function (cmd) { return cmd.startsWith(input); });
 
                 if (matches.length === 1) {
@@ -645,6 +645,14 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+
+    document.querySelector('.terminal-dot.red').addEventListener('click', () => {
+        setMode('ui', false);
+    });
+
+    document.querySelector('.terminal-dot.yellow').addEventListener('click', () => {
+        setMode('ui', false);
+    });
 
     document.addEventListener("keydown", function (e) {
         if (!terminalMode) {
