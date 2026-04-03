@@ -18,14 +18,86 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var toggle = document.getElementById("darkModeToggle");
     var langToggle = document.getElementById("langToggle");
-    var burgerBtn = document.getElementById("burgerBtn");
-    var navDrawer = document.getElementById("navDrawer");
     var darkMobileBtn = document.getElementById("darkModeToggleMobile");
     var langMobileBtn = document.getElementById("langToggleMobile");
     var popup = document.getElementById("cookiePopup");
     var closeBtn = document.getElementById("closeBtn");
     var snNav = document.getElementById("sideNav");
     var snPill = document.getElementById("sideNavPill");
+
+
+    // ---- CHOIX AFFICHAGE ----
+
+    var displayPopup = document.getElementById("displayPopup");
+    var uiBtn = document.getElementById("uiBtn");
+    var terminalBtn = document.getElementById("terminalBtn");
+    var btnSwitch = document.getElementById("btn-switch-terminal-ui");
+    var terminalMode = false;
+
+    function setMode(mode, firstVisit) {
+        terminalMode = (mode === "terminal");
+        localStorage.setItem("displayMode", mode);
+
+        // Met à jour le bouton switch
+        if (btnSwitch) {
+            if (terminalMode) {
+                btnSwitch.innerHTML = '<ion-icon name="browsers-outline"></ion-icon>';
+                btnSwitch.setAttribute("data-label-fr", "Interface");
+                btnSwitch.setAttribute("data-label-en", "Interface");
+                btnSwitch.setAttribute("data-label", "Interface");
+            } else {
+                btnSwitch.innerHTML = '<ion-icon name="terminal-outline"></ion-icon>';
+                btnSwitch.setAttribute("data-label-fr", "Terminal");
+                btnSwitch.setAttribute("data-label-en", "Terminal");
+                btnSwitch.setAttribute("data-label", "Terminal");
+            }
+            btnSwitch.classList.remove("active");
+        }
+
+        // Ouvre ou ferme le terminal
+        if (terminalMode) {
+            if (!firstVisit) closeTerminal();
+            setTimeout(function () { openTerminal(); }, firstVisit ? 450 : 0);
+        } else {
+            closeTerminal();
+        }
+    }
+
+    function closeDisplayPopup() {
+        displayPopup.classList.add("hidden");
+        setTimeout(function () { displayPopup.style.display = "none"; }, 400);
+    }
+
+    // Vérifie si un choix est déjà enregistré
+    var savedMode = localStorage.getItem("displayMode");
+
+    if (savedMode) {
+        // Pas de popup — applique directement le mode sauvegardé
+        displayPopup.style.display = "none";
+        setMode(savedMode, true);
+    } else {
+        // Première visite — affiche le popup
+        if (uiBtn) {
+            uiBtn.addEventListener("click", function () {
+                setMode("ui", false);
+                closeDisplayPopup();
+            });
+        }
+        if (terminalBtn) {
+            terminalBtn.addEventListener("click", function () {
+                setMode("terminal", true);
+                closeDisplayPopup();
+            });
+        }
+    }
+
+    // Bouton switch — bascule entre les deux modes
+    if (btnSwitch) {
+        btnSwitch.addEventListener("click", function () {
+            var newMode = terminalMode ? "ui" : "terminal";
+            setMode(newMode, false);
+        });
+    }
 
     // ---- SYNC BOUTONS MOBILES ----
 
@@ -64,7 +136,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---- LANGUE ----
 
-    var currentLang = getCookie("lang") || "fr";
+
+    var browserLang = navigator.language || navigator.userLanguage || "fr";
+    var currentLang = getCookie("lang") || (browserLang.startsWith("fr") ? "fr" : "en");
     document.documentElement.lang = currentLang;
 
     const FLAG_FR = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 60" width="20" height="13" style="vertical-align:middle;margin-right:4px"><rect width="30" height="60" fill="#002395"/><rect x="30" width="30" height="60" fill="#EDEDED"/><rect x="60" width="30" height="60" fill="#ED2939"/></svg>`;
@@ -95,7 +169,13 @@ document.addEventListener("DOMContentLoaded", function () {
         if (aboutBio) {
             aboutBio.innerHTML = currentLang === "en"
                 ? "Junior <strong>full-stack</strong> developer with a solid grasp of both front-end and back-end environments. Comfortable across multiple languages — from <strong>JavaScript</strong> to <strong>Python</strong>, including <strong>Java</strong> and <strong>PHP/Symfony</strong> — I enjoy building robust applications as much as clean interfaces.<br><br>Passionate about <strong>cybersecurity</strong>, I actively explore attack and defense strategies, and am looking to deepen my expertise in this field through an <strong>apprenticeship or internship</strong>."
-                : "Développeur junior <strong>full-stack</strong> avec une bonne maîtrise des environnements front et back. À l'aise sur plusieurs langages — de <strong>JavaScript</strong> à <strong>Python</strong> en passant par<strong>Java</strong> et <strong>PHP/Symfony</strong> — j'aime construire des applications robustes autantque des interfaces propres.<br><br>Passionné par la <strong>cybersécurité</strong>, je m'intéresse activement aux logiques d'attaque et dedéfense, et cherche à approfondir ce domaine dans le cadre d'une <strong>alternance ou d'un stage</strong>.";
+                : "Développeur junior <strong>full-stack</strong> avec une bonne maîtrise des environnements front et back. À l'aise sur plusieurs langages — de <strong>JavaScript</strong> à <strong>Python</strong> en passant par <strong>Java</strong> et <strong>PHP/Symfony</strong> — j'aime construire des applications robustes autant que des interfaces propres.<br><br>Passionné par la <strong>cybersécurité</strong>, je m'intéresse activement aux logiques d'attaque et de défense, et cherche à approfondir ce domaine dans le cadre d'une <strong>alternance ou d'un stage</strong>.";
+        }
+        var displayContent = document.getElementById("display-content");
+        if (displayContent) {
+            displayContent.innerHTML = currentLang === "en"
+                ? '<p id="displayDesc">Choisir un affichage</p> < h2 > Comment veux - tu < br > explorer ?</h2 >'
+                : '<p id="displayDesc">Choose a view</p> < h2 > How do you want < br > to explore ?</h2 >';
         }
 
     }
@@ -133,6 +213,30 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".header-nav a").forEach(function (el, i) {
         setTimeout(function () { el.classList.add("visible"); }, 1300 + i * 400);
     });
+
+    // ---- ANIMATION COMPTE DES PROJETS ETC ---- //
+
+    function animateCount(el, from, to, duration) {
+        var start = null;
+
+        function step(timestamp) {
+            if (!start) start = timestamp;
+            var progress = Math.min((timestamp - start) / duration, 1);
+
+            // Easing expo pour que ça décélère à la fin
+            var eased = 1 - Math.pow(1 - progress, 4);
+
+            el.textContent = Math.floor(from + (to - from) * eased) + (el.dataset.suffix || "");
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                el.textContent = to + (el.dataset.suffix || "");
+            }
+        }
+
+        requestAnimationFrame(step);
+    }
 
     // ---- COOKIE POPUP ----
 
@@ -349,65 +453,73 @@ document.addEventListener("DOMContentLoaded", function () {
         { text: "", cls: "muted" },
         { text: "  Portfolio v2.0.0 — France \uD83C\uDDEB\uD83C\uDDF7", cls: "muted" },
         { text: "", cls: "muted" },
-        { text: "  \uD83C\uDF89 Tu as trouvé l'easter egg !", cls: "green" },
         { text: "  Tape 'help' pour voir les commandes.", cls: "muted" },
         { text: "", cls: "muted" },
     ];
 
-    var COMMANDS = {
-        help: [
-            { text: " Commandes disponibles :", cls: "white" },
-            { text: "  whoami    \u2192 qui suis-je ?", cls: "" },
-            { text: "  skills    \u2192 mes compétences", cls: "" },
-            { text: "  ctf       \u2192 mes challenges", cls: "" },
-            { text: "  contact   \u2192 me contacter", cls: "" },
-            { text: "  matrix    \u2192 \uD83D\uDC07", cls: "" },
-            { text: "  clear     \u2192 vider le terminal", cls: "" },
-            { text: "  exit      \u2192 fermer", cls: "" },
-        ],
-        whoami: [
-            { text: " Clément Humez", cls: "white" },
-            { text: " Développeur junior full-stack", cls: "" },
-            { text: " Passionné de cybersécurité & CTF", cls: "" },
-            { text: " Basé en France \uD83C\uDDEB\uD83C\uDDF7", cls: "" },
-            { text: " Recherche alternance / stage", cls: "green" },
-        ],
-        skills: [
-            { text: " Stack technique :", cls: "white" },
-            { text: "  [████████░░] Git         88%", cls: "green" },
-            { text: "  [████████░░] Python      85%", cls: "green" },
-            { text: "  [███████░░░] HTML/CSS    72%", cls: "green" },
-            { text: "  [███████░░░] Tailwind    70%", cls: "green" },
-            { text: "  [██████░░░░] JavaScript  65%", cls: "green" },
-            { text: "  [██████░░░░] React       60%", cls: "green" },
-            { text: "  [██████░░░░] Java        60%", cls: "green" },
-            { text: "  [█████░░░░░] PHP         57%", cls: "green" },
-            { text: "  [█████░░░░░] Cybersec    55%", cls: "red" },
-            { text: "  [█████░░░░░] Linux       54%", cls: "green" },
-            { text: "  [█████░░░░░] Symfony     53%", cls: "green" },
-            { text: "  [████░░░░░░] Ruby        45%", cls: "green" },
-        ],
-        ctf: [
-            { text: " CTF & Cybersécurité :", cls: "white" },
-            { text: "  Plateformes : Root-Me, TryHackMe", cls: "" },
-            { text: "  Catégories  : Web, Forensics, Misc", cls: "" },
-            { text: "  Niveau      : Débutant → Intermédiaire", cls: "" },
-            { text: "  Objectif    : Spécialisation sécurité", cls: "green" },
-        ],
-        contact: [
-            { text: " Me contacter :", cls: "white" },
-            { text: "  Email    : humez.clement@gmail.com", cls: "" },
-            { text: "  LinkedIn : Clément Humez", cls: "" },
-            { text: "  GitHub   : Clement-Dev60", cls: "" },
-        ],
-        matrix: [
-            { text: " Wake up, Neo...", cls: "green" },
-            { text: " The Matrix has you...", cls: "green" },
-            { text: " Follow the white rabbit. \uD83D\uDC07", cls: "green" },
-        ],
-        exit: null,
-        clear: null,
-    };
+    function getCommands() {
+        var fr = currentLang === "fr";
+        return {
+            help: [
+                { text: fr ? " Commandes disponibles :" : " Available commands:", cls: "white" },
+                { text: "  whoami    \u2192 " + (fr ? "qui suis-je ?" : "who am I?"), cls: "" },
+                { text: "  skills    \u2192 " + (fr ? "mes compétences" : "my skills"), cls: "" },
+                { text: "  ctf       \u2192 " + (fr ? "mes challenges" : "my challenges"), cls: "" },
+                { text: "  contact   \u2192 " + (fr ? "me contacter" : "contact me"), cls: "" },
+                { text: "  lang      \u2192 " + (fr ? "changer la langue" : "change language"), cls: "" },
+                { text: "  matrix    \u2192 \uD83D\uDC07", cls: "" },
+                { text: "  clear     \u2192 " + (fr ? "vider le terminal" : "clear terminal"), cls: "" },
+                { text: "  exit      \u2192 " + (fr ? "fermer" : "close"), cls: "" },
+            ],
+            whoami: [
+                { text: " Clément Humez", cls: "white" },
+                { text: fr ? " Développeur junior full-stack" : " Junior full-stack developer", cls: "" },
+                { text: fr ? " Passionné de cybersécurité & CTF" : " Passionate about cybersecurity & CTF", cls: "" },
+                { text: " " + (fr ? "Basé en France" : "Based in France") + " \uD83C\uDDEB\uD83C\uDDF7", cls: "" },
+                { text: fr ? " Recherche alternance / stage" : " Looking for apprenticeship / internship", cls: "green" },
+            ],
+            skills: [
+                { text: fr ? " Stack technique :" : " Tech stack:", cls: "white" },
+                { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591] Git         88%", cls: "green" },
+                { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591] Python      85%", cls: "green" },
+                { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591] HTML/CSS    72%", cls: "green" },
+                { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591] Tailwind    70%", cls: "green" },
+                { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591] JavaScript  65%", cls: "green" },
+                { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591] React       60%", cls: "green" },
+                { text: "  [\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591] Java        60%", cls: "green" },
+                { text: "  [\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591\u2591] PHP         57%", cls: "green" },
+                { text: "  [\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591\u2591] Cybersec    55%", cls: "red" },
+                { text: "  [\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591\u2591] Linux       54%", cls: "green" },
+                { text: "  [\u2588\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591\u2591] Symfony     53%", cls: "green" },
+                { text: "  [\u2588\u2588\u2588\u2588\u2591\u2591\u2591\u2591\u2591\u2591] Ruby        45%", cls: "green" },
+            ],
+            ctf: [
+                { text: fr ? " CTF & Cybersécurité :" : " CTF & Cybersecurity:", cls: "white" },
+                { text: "  " + (fr ? "Plateformes" : "Platforms") + " : Root-Me, TryHackMe", cls: "" },
+                { text: "  " + (fr ? "Catégories" : "Categories") + "  : Web, Forensics, Misc", cls: "" },
+                { text: "  " + (fr ? "Niveau" : "Level") + "      : " + (fr ? "Débutant → Intermédiaire" : "Beginner → Intermediate"), cls: "" },
+                { text: "  " + (fr ? "Objectif" : "Goal") + "    : " + (fr ? "Spécialisation sécurité" : "Security specialization"), cls: "green" },
+            ],
+            contact: [
+                { text: fr ? " Me contacter :" : " Contact me:", cls: "white" },
+                { text: "  Email    : humez.clement@gmail.com", cls: "" },
+                { text: "  LinkedIn : Clément Humez", cls: "" },
+                { text: "  GitHub   : Clement-Dev60", cls: "" },
+            ],
+            lang: [
+                { text: fr ? " Changer de langue :" : " Change language:", cls: "white" },
+                { text: "  lang fr  → français", cls: "" },
+                { text: "  lang en  → english", cls: "" },
+            ],
+            matrix: [
+                { text: " Wake up, Neo...", cls: "green" },
+                { text: " The Matrix has you...", cls: "green" },
+                { text: " Follow the white rabbit. \uD83D\uDC07", cls: "green" },
+            ],
+            exit: null,
+            clear: null,
+        };
+    }
 
     function addLine(text, cls, delay) {
         var p = document.createElement("p");
@@ -439,9 +551,29 @@ document.addEventListener("DOMContentLoaded", function () {
         addLine("\u27A4  " + cmd, "");
         cmdHistory.unshift(cmd);
         cmdIndex = -1;
-        if (cmd === "exit") { closeTerminal(); return; }
+        if (cmd === "exit") {
+            if (terminalMode) {
+                setMode("ui", false);
+            } else {
+                closeTerminal();
+            }
+            return;
+        }
         if (cmd === "clear") { terminalBody.innerHTML = ""; return; }
-        var lines = COMMANDS[cmd];
+
+        if (cmd === "lang fr" || cmd === "lang en") {
+            var newLang = cmd === "lang fr" ? "fr" : "en";
+            currentLang = newLang;
+            setCookie("lang", newLang, 365);
+            document.documentElement.lang = newLang;
+            translatePage();
+            updateLangButton();
+            addLine(" Langue changée → " + (newLang === "fr" ? "Français 🇫🇷" : "English 🇬🇧"), "green");
+            addLine("", "muted");
+            return;
+        }
+
+        var lines = getCommands()[cmd];
         if (lines) {
             lines.forEach(function (l, i) { addLine(l.text, l.cls, i * 60); });
         } else {
@@ -509,17 +641,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") { closeTerminal(); return; }
-        if (e.ctrlKey && e.shiftKey && e.key === "K") { e.preventDefault(); openTerminal(); return; }
-        if (e.keyCode === KONAMI[konamiPos]) {
-            konamiPos++;
-            if (konamiPos === KONAMI.length) { konamiPos = 0; openTerminal(); }
-        } else { konamiPos = 0; }
+        if (!terminalMode) {
+            if (e.ctrlKey && e.shiftKey && e.key === "K") { e.preventDefault(); setMode("terminal", false); openTerminal(); return; }
+            if (e.keyCode === KONAMI[konamiPos]) {
+                konamiPos++;
+                if (konamiPos === KONAMI.length) { konamiPos = 0; setMode("terminal", false); openTerminal(); }
+            } else { konamiPos = 0; }
+        }
     });
 
     if (terminalOverlay) {
         terminalOverlay.addEventListener("click", function (e) {
-            if (e.target === terminalOverlay) closeTerminal();
+            if (e.target === terminalOverlay && !terminalMode) closeTerminal();
         });
     }
     var brushCanvas = document.getElementById("brushCanvas");
@@ -664,7 +797,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    document.querySelectorAll(".side-nav-btn").forEach(function (btn) {
+    document.querySelectorAll(".side-nav-btn, .btn-switch-terminal-ui").forEach(function (btn) {
         btn.addEventListener("mouseenter", function () {
             var label = btn.dataset.labelFr || btn.dataset.label || "";
             if (!label) return;
@@ -688,4 +821,22 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 40);
         });
     });
+
+    // ---- COMPTEURS ANIMÉS ----
+    if ("IntersectionObserver" in window) {
+        var countObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    var el = entry.target;
+                    var to = parseInt(el.dataset.count);
+                    animateCount(el, 0, to, 3200);
+                    countObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll("[data-count]").forEach(function (el) {
+            countObserver.observe(el);
+        });
+    }
 });

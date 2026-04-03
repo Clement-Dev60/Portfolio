@@ -42,10 +42,12 @@
 
     <!-- Centre : liens de navigation -->
     <nav class="header-nav">
-      <div class="logo">Développeur Junior - Web Full-Stack et Cybersécurité</div>
+      <div class="logo" data-fr="Développeur Junior - Web Full-Stack et Cybersécurité"
+        data-en="Junior Developer - Web Full-Stack and Cybersecurity">Développeur Junior - Web Full-Stack et
+        Cybersécurité</div>
     </nav>
 
-    <!-- Droite : dark mode + langue + burger mobile -->
+    <!-- Droite : dark mode + langue -->
     <div class="header-right">
       <button id="darkModeToggle" aria-label="Activer le mode sombre"></button>
       <button id="langToggle" aria-label="Changer la langue"></button>
@@ -81,6 +83,14 @@
     <button class="side-nav-btn" id="snBtn4" data-label="Contact" onclick="sideNavGoTo(4)">
       <ion-icon name="call-outline"></ion-icon>
     </button>
+  </aside>
+
+
+  <!-- ===== BOUTON SWITCH TERMINAL/UI ===== -->
+
+  <aside class="switch-terminal-ui" id="switch-terminal-ui">
+    <button class="btn-switch-terminal-ui" id="btn-switch-terminal-ui" data-label-fr="Affichage terminal"
+      data-label-en="Terminal display"><ion-icon name="terminal-outline"></ion-icon></button>
   </aside>
 
 
@@ -144,7 +154,7 @@
         <div>
           <p class="about-label" data-fr="Intérêts" data-en="Interests">Intérêts</p>
           <div class="about-chips">
-            <span class="about-chip sec">Cybersécurité</span>
+            <span class="about-chip sec" data-fr="Cybersécurité" data-en="Cybersecurity">Cybersécurité</span>
           </div>
         </div>
 
@@ -159,9 +169,11 @@
             data-en="Junior full-stack developer comfortable in both front-end and back-end environments. At ease with multiple languages — from JavaScript to Python, Java and PHP/Symfony — I enjoy building robust applications as much as clean interfaces. Passionate about cybersecurity, I actively explore offensive and defensive concepts, and am looking to deepen this field through an apprenticeship or internship.">
             Développeur junior <strong>full-stack</strong> avec une bonne maîtrise des environnements front et back.
             À l'aise sur plusieurs langages — de <strong>JavaScript</strong> à <strong>Python</strong> en passant par
-            <strong>Java</strong> et <strong>PHP/Symfony</strong> — j'aime construire des applications robustes autant que des interfaces propres.<br><br>
+            <strong>Java</strong> et <strong>PHP/Symfony</strong> — j'aime construire des applications robustes autant
+            que des interfaces propres.<br><br>
             Passionné par la <strong>cybersécurité</strong>, je m'intéresse activement aux logiques d'attaque et de
-            défense, et cherche à approfondir ce domaine dans le cadre d'une <strong>alternance et/ou d'un stage</strong>.
+            défense, et cherche à approfondir ce domaine dans le cadre d'une <strong>alternance et/ou d'un
+              stage</strong>.
           </p>
         </div>
 
@@ -169,15 +181,15 @@
           <p class="about-label" data-fr="En chiffres" data-en="By the numbers">En chiffres</p>
           <div class="about-stats">
             <div class="about-stat">
-              <div class="about-stat-n y">5+</div>
+              <div class="about-stat-n y" data-count="5" data-suffix="+">0+</div>
               <div class="about-stat-l" data-fr="Projets" data-en="Projects">Projets</div>
             </div>
             <div class="about-stat">
-              <div class="about-stat-n b">9</div>
+              <div class="about-stat-n b" data-count="9" data-suffix="">0</div>
               <div class="about-stat-l" data-fr="Langages" data-en="Languages">Langages</div>
             </div>
             <div class="about-stat">
-              <div class="about-stat-n r">2</div>
+              <div class="about-stat-n r" data-count="2" data-suffix="">0</div>
               <div class="about-stat-l" data-fr="Frameworks" data-en="Frameworks">Frameworks</div>
             </div>
           </div>
@@ -761,11 +773,39 @@
   <div class="cookie-popup" id="cookiePopup" role="dialog" aria-describedby="cookieDesc">
     <div class="cookie-icon">🍪</div>
     <div class="cookie-content">
-      <p id="cookieDesc">Ce site utilise des cookies strictement nécessaires à son fonctionnement : mémorisation de la
+      <p id="cookieDesc" data-label-fr="Ce site utilise des cookies
+        strictement nécessaires à son fonctionnement : mémorisation de la
+        langue choisie (FR/EN) et de vos préférences d'affichage. Aucune donnée n'est transmise à des tiers."
+        data-label-en="This site uses cookies
+strictly necessary for its operation: remembering the
+chosen language (FR/EN) and your display preferences. No data is transmitted to third parties.">Ce site utilise des
+        cookies
+        strictement nécessaires à son fonctionnement : mémorisation de la
         langue choisie (FR/EN) et de vos préférences d'affichage. Aucune donnée n'est transmise à des tiers.
       </p>
     </div>
     <button class="close-btn" id="closeBtn" aria-label="Fermer">&times;</button>
+  </div>
+
+
+  <!-- ===== CHOIX AFFICHAGE ===== -->
+
+
+  <div class="display-popup" id="displayPopup" role="dialog" aria-describedby="displayDesc">
+    <div class="display-content">
+      <p id="displayDesc">Choisir un affichage</p>
+      <h2>Comment veux-tu<br>explorer ?</h2>
+    </div>
+    <div class="display-choices">
+      <button class="ui-btn" id="uiBtn" aria-label="Affichage UI">
+        <ion-icon name="browsers-outline"></ion-icon>
+        Interface
+      </button>
+      <button class="terminal-btn" id="terminalBtn" aria-label="Affichage terminal">
+        <ion-icon name="terminal-outline"></ion-icon>
+        Terminal
+      </button>
+    </div>
   </div>
 
   <script src="assets/js/script.js"></script>
@@ -785,7 +825,7 @@
       <div class="terminal-body" id="terminalBody">
         <!-- Les lignes sont injectées par JS -->
       </div>
-      <div style="position:relative; padding: 4px 24px 16px;">
+      <div class="terminal-input-area">
         <div class="terminal-input-row">
           <span class="terminal-prompt">➜</span>
           <div class="terminal-input-wrap">
@@ -794,7 +834,6 @@
             <span class="terminal-ghost" id="terminalGhost"></span>
           </div>
         </div>
-        <span class="terminal-hint">ESC pour fermer</span>
       </div>
     </div>
   </div>
