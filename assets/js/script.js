@@ -174,8 +174,8 @@ document.addEventListener("DOMContentLoaded", function () {
         var displayContent = document.getElementById("display-content");
         if (displayContent) {
             displayContent.innerHTML = currentLang === "en"
-                ? '<p id="displayDesc">Choose a view</p> < h2 > How do you want < br > to explore ?</h2 >'
-                : '<p id="displayDesc">Choisir un affichage</p> < h2 > Comment veux - tu < br > explorer ?</h2 >';
+                ? '<p id="displayDesc">Choose a view</p> <h2> How do you want <br> to explore ?</h2>'
+                : '<p id="displayDesc">Choisir un affichage</p> <h2> Comment veux - tu <br> explorer ?</h2>';
         }
 
     }
