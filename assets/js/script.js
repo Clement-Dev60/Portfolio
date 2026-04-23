@@ -853,4 +853,95 @@ document.addEventListener("DOMContentLoaded", function () {
             countObserver.observe(el);
         });
     }
+
+    // ---- FORMULAIRE EMAILJS ----
+
+    var contactForm = document.getElementById("contactForm");
+    var formStatus = document.getElementById("formStatus");
+    var formSubmit = document.getElementById("formSubmit");
+
+    if (contactForm) {
+        var lastSubmit = 0;
+        contactForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            var now = Date.now();
+            if (now - lastSubmit < 30000) {
+                formStatus.textContent = currentLang === "fr"
+                    ? "✗ Veuillez patienter avant de renvoyer."
+                    : "✗ Please wait before sending again.";
+                formStatus.className = "contact-form-status error";
+                return;
+            }
+            lastSubmit = now;
+
+            var name = document.getElementById("formName").value.trim();
+            var email = document.getElementById("formEmail").value.trim();
+            var subject = document.getElementById("formSubject").value.trim();
+            var message = document.getElementById("formMessage").value.trim();
+
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!name || !email || !subject || !message) {
+                formStatus.textContent = currentLang === "fr"
+                    ? "✗ Veuillez remplir tous les champs."
+                    : "✗ Please fill in all fields.";
+                formStatus.className = "contact-form-status error";
+                return;
+            }
+
+            if (!emailRegex.test(email)) {
+                formStatus.textContent = currentLang === "fr"
+                    ? "✗ Adresse email invalide."
+                    : "✗ Invalid email address.";
+                formStatus.className = "contact-form-status error";
+                return;
+            }
+
+            formSubmit.disabled = true;
+            formSubmit.querySelector(".contact-form-btn-text").textContent =
+                currentLang === "fr" ? "Envoi..." : "Sending...";
+
+            if (document.getElementById("honeypot").value !== "") {
+                return;
+            }
+
+            fetch("https://mailer.clement-humez.fr/send", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    subject: subject,
+                    message: message
+                })
+            })
+                .then(function (response) {
+                    if (response.ok) {
+                        formStatus.textContent = currentLang === "fr"
+                            ? "✓ Message envoyé !"
+                            : "✓ Message sent!";
+                        formStatus.className = "contact-form-status success";
+                        contactForm.reset();
+                    } else {
+                        throw new Error();
+                    }
+                })
+                .catch(function () {
+                    formStatus.textContent = currentLang === "fr"
+                        ? "✗ Une erreur est survenue, réessaie."
+                        : "✗ Something went wrong, please retry.";
+                    formStatus.className = "contact-form-status error";
+                })
+                .finally(function () {
+                    formSubmit.disabled = false;
+                    formSubmit.querySelector(".contact-form-btn-text").textContent =
+                        currentLang === "fr" ? "Envoyer" : "Send";
+                    setTimeout(function () {
+                        formStatus.textContent = "";
+                        formStatus.className = "contact-form-status";
+                    }, 5000);
+                });
+        });
+    }
 });
