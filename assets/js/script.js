@@ -855,6 +855,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ---- FORMULAIRE EMAILJS ----
+    emailjs.init("mFGe-ZkIvhXpJbgCu");
 
     var contactForm = document.getElementById("contactForm");
     var formStatus = document.getElementById("formStatus");
@@ -902,30 +903,25 @@ document.addEventListener("DOMContentLoaded", function () {
             formSubmit.querySelector(".contact-form-btn-text").textContent =
                 currentLang === "fr" ? "Envoi..." : "Sending...";
 
+            var params = {
+                name: name,
+                from_email: email,
+                email: email,
+                subject: subject,
+                message: message,
+            };
+
             if (document.getElementById("honeypot").value !== "") {
                 return;
             }
 
-            fetch("https://mailer.clement-humez.fr/send", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name: name,
-                    email: email,
-                    subject: subject,
-                    message: message
-                })
-            })
-                .then(function (response) {
-                    if (response.ok) {
-                        formStatus.textContent = currentLang === "fr"
-                            ? "✓ Message envoyé !"
-                            : "✓ Message sent!";
-                        formStatus.className = "contact-form-status success";
-                        contactForm.reset();
-                    } else {
-                        throw new Error();
-                    }
+            emailjs.send("service_ce6zkkb", "template_ofivhf6", params)
+                .then(function () {
+                    formStatus.textContent = currentLang === "fr"
+                        ? "✓ Message envoyé !"
+                        : "✓ Message sent!";
+                    formStatus.className = "contact-form-status success";
+                    contactForm.reset();
                 })
                 .catch(function () {
                     formStatus.textContent = currentLang === "fr"
