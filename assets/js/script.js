@@ -868,7 +868,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var now = Date.now();
             if (now - lastSubmit < 30000) {
                 formStatus.textContent = currentLang === "fr"
-                    ? "✗ Veuillez patienter avant de renvoyer."
+                    ? "✗ Veuillez patienter avant de renvoyer un message."
                     : "✗ Please wait before sending again.";
                 formStatus.className = "contact-form-status error";
                 return;
