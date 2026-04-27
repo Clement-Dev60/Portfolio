@@ -262,7 +262,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ---- SIDEBAR ----
 
-    var SN_IDS = ["À_propos", "Skills", "Projets", "Parcours", "Contact"];
+    var SN_IDS = ["about", "skills", "projects", "journey", "contact"];
     var SN_COLORS_DARK = ["#e8ff57", "#ff4d6d", "#00d9ff", "#ff009d", "#b87cff"];
     var SN_COLORS_LIGHT = ["#2a9d2a", "#cc2244", "#0099bb", "#981666", "#8844cc"];
 
@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", function () {
         snBtns.forEach(function (btn, j) {
             if (!btn) return;
             btn.classList.toggle("active", j === i);
-            btn.style.color = j === i ? colors[i] : "";
+            btn.style.color = j === i ? colors[j] : "";
         });
 
         if (!snNav || !snPill || !snBtns[i]) return;
@@ -315,6 +315,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var bar = document.getElementById("scrollProgressBar");
         if (bar) bar.style.background = colors[i];
     }
+
 
     function detectSection() {
         const scrollBottom = window.innerHeight + window.scrollY;
@@ -365,8 +366,13 @@ document.addEventListener("DOMContentLoaded", function () {
     window.sideNavGoTo = function (i) {
         var el = document.getElementById(SN_IDS[i]);
         if (!el) return;
-        el.scrollIntoView({ behavior: "smooth" });
-        sideNavSetActive(i);
+        if (matrixRunning) return;
+        runMatrixTransition(function () {
+            el.scrollIntoView({ behavior: "instant" });
+            sideNavSetActive(i);
+             history.replaceState(null, null, "#" + SN_IDS[i]);
+        });
+       
     };
 
     detectSection();
@@ -854,6 +860,94 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // ---- TRANSITION MATRIX ----
+
+    var matrixTransition = document.getElementById("matrixTransition");
+    var matrixCanvas = document.getElementById("matrixCanvas");
+    var matrixCtx = matrixCanvas ? matrixCanvas.getContext("2d") : null;
+    var matrixAnimId = null;
+    var matrixRunning = false;
+
+    var MATRIX_CHARS = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF@#$%&";
+
+    function runMatrixTransition(callback) {
+        if (!matrixCanvas || !matrixCtx) { callback(); return; }
+
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
+
+        var cols = Math.floor(matrixCanvas.width / 16);
+        var drops = Array(cols).fill(0).map(function () {
+            return Math.random() * -matrixCanvas.height / 16;
+        });
+        var phase = "in";
+        var coverage = 0;
+        var callbackFired = false;
+
+        matrixTransition.classList.add("active");
+        matrixRunning = true;
+
+        function draw() {
+            matrixCtx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+            matrixCtx.font = "14px 'DM Mono', monospace";
+
+            var atBottom = 0;
+
+            drops.forEach(function (drop, i) {
+                var bright = drop > 0 && drop * 16 < matrixCanvas.height + 32;
+                matrixCtx.fillStyle = bright ? "#ffffff" : "#00ff41";
+
+                var char = MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)];
+                matrixCtx.fillText(char, i * 16, drop * 16);
+
+                matrixCtx.fillStyle = "#00ff41";
+                matrixCtx.fillText(
+                    MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)],
+                    i * 16, (drop - 1) * 16
+                );
+
+                if (drop * 16 > matrixCanvas.height) atBottom++;
+
+                if (phase === "in") {
+                    drops[i] += 0.5 + Math.random() * 0.3;
+                }
+            });
+
+            coverage = atBottom / cols;
+            if (phase === "in" && coverage > 0.85 && !callbackFired) {
+                callbackFired = true;
+                callback();
+                phase = "out";
+            }
+
+            if (phase === "out") {
+                matrixCtx.fillStyle = "rgba(0, 0, 0, 0.04)";
+                matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+                drops.forEach(function (drop, i) {
+                    drops[i] += 1.5 + Math.random() * 0.8;
+                });
+
+                var allGone = drops.every(function (d) { return d * 16 > matrixCanvas.height + 200; });
+                if (allGone) {
+                    matrixCtx.clearRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+                    matrixTransition.classList.remove("active");
+                    matrixRunning = false;
+                    cancelAnimationFrame(matrixAnimId);
+                    return;
+                }
+            }
+
+            matrixAnimId = requestAnimationFrame(draw);
+        }
+
+        if (matrixAnimId) cancelAnimationFrame(matrixAnimId);
+        matrixCtx.clearRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+        matrixAnimId = requestAnimationFrame(draw);
+    }
+
     // ---- FORMULAIRE EMAILJS ----
 
     var contactForm = document.getElementById("contactForm");
@@ -944,4 +1038,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         });
     }
+    (function () {
+        if (!window.location.hash) return;
+
+        var id = window.location.hash.replace("#", "");
+        var el = document.getElementById(id);
+        if (!el) return;
+
+        setTimeout(function () {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+            var index = SN_IDS.indexOf(id);
+            if (index !== -1) {
+                sideNavSetActive(index);
+            }
+        }, 100);
+    })();
 });
