@@ -868,7 +868,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var matrixAnimId = null;
     var matrixRunning = false;
 
-    var MATRIX_CHARS = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF@#$%&";
+    var MATRIX_CHARS = "01ABCDEFabcdef@#$%&!?<>/\\{}[]()=+-*;:.,_~`^";
 
     function runMatrixTransition(callback) {
         if (!matrixCanvas || !matrixCtx) { callback(); return; }
