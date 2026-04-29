@@ -38,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
         terminalMode = (mode === "terminal");
         localStorage.setItem("displayMode", mode);
 
-        // Met à jour le bouton switch
         if (btnSwitch) {
             if (terminalMode) {
                 btnSwitch.innerHTML = '<ion-icon name="browsers-outline"></ion-icon>';
@@ -54,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
             btnSwitch.classList.remove("active");
         }
 
-        // Ouvre ou ferme le terminal
         if (terminalMode) {
             if (!firstVisit) closeTerminal();
             setTimeout(function () { openTerminal(); }, firstVisit ? 450 : 0);
@@ -68,15 +66,12 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(function () { displayPopup.style.display = "none"; }, 400);
     }
 
-    // Vérifie si un choix est déjà enregistré
     var savedMode = localStorage.getItem("displayMode");
 
     if (savedMode) {
-        // Pas de popup — applique directement le mode sauvegardé
         displayPopup.style.display = "none";
         setMode(savedMode, true);
     } else {
-        // Première visite — affiche le popup
         if (uiBtn) {
             uiBtn.addEventListener("click", function () {
                 setMode("ui", false);
@@ -91,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Bouton switch — bascule entre les deux modes
     if (btnSwitch) {
         btnSwitch.addEventListener("click", function () {
             var newMode = terminalMode ? "ui" : "terminal";
@@ -126,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (toggle) {
         toggle.addEventListener("click", function () {
             isDark = document.body.classList.toggle("dark");
-            document.documentElement.classList.toggle("dark", isDark); // ← ligne ajoutée
+            document.documentElement.classList.toggle("dark", isDark);
             localStorage.setItem("darkMode", isDark);
             updateDarkModeIcon();
             currentSection = -1;
@@ -135,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ---- LANGUE ----
-
 
     var browserLang = navigator.language || navigator.userLanguage || "fr";
     var currentLang = getCookie("lang") || (browserLang.startsWith("fr") ? "fr" : "en");
@@ -370,9 +363,9 @@ document.addEventListener("DOMContentLoaded", function () {
         runMatrixTransition(function () {
             el.scrollIntoView({ behavior: "instant" });
             sideNavSetActive(i);
-             history.replaceState(null, null, "#" + SN_IDS[i]);
+            history.replaceState(null, null, "#" + SN_IDS[i]);
         });
-       
+
     };
 
     detectSection();
@@ -953,6 +946,11 @@ document.addEventListener("DOMContentLoaded", function () {
     var contactForm = document.getElementById("contactForm");
     var formStatus = document.getElementById("formStatus");
     var formSubmit = document.getElementById("formSubmit");
+    var modal = document.getElementById("modal");
+    var openBtn = document.getElementById("openBtn");
+    var cancelBtn = document.getElementById("cancelBtn");
+    if (openBtn) openBtn.addEventListener("click", function () { modal.showModal(); });
+    if (cancelBtn) cancelBtn.addEventListener("click", function () { modal.close(); });
 
     if (contactForm) {
         var lastSubmit = 0;
@@ -1017,6 +1015,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             : "✓ Message sent!";
                         formStatus.className = "contact-form-status success";
                         contactForm.reset();
+                        setTimeout(function() { modal.close(); }, 1500);
                     } else {
                         throw new Error();
                     }

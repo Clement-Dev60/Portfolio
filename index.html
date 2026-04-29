@@ -719,40 +719,47 @@
             <span data-fr="Disponible pour une
             alternance" data-en="Available for apprenticeship"></span>
           </div>
+          <br>
           <!-- ===== FORMULAIRE DE CONTACT ===== -->
-          <div class="contact-form-section">
-            <p class="contact-label" data-fr="Envoyer un message" data-en="Send a message">Envoyer un message</p>
+          <button id="openBtn">Me contacter directement ?</button>
+          <dialog id="modal">
+            <div class="contact-form-section">
+              <p class="contact-label" data-fr="Envoyer un message" data-en="Send a message">Envoyer un message</p>
 
-            <form class="contact-form" id="contactForm">
-              <div class="contact-form-group">
-                <label class="contact-form-label" data-fr="Nom" data-en="Name">Nom</label>
-                <input class="contact-form-input" type="text" id="formName" placeholder="John Doe" required />
-              </div>
-              <div class="contact-form-row">
+              <form class="contact-form" id="contactForm">
                 <div class="contact-form-group">
-                  <label class="contact-form-label" data-fr="Email" data-en="Email">Email</label>
-                  <input class="contact-form-input" type="email" id="formEmail" placeholder="john.doe@email.com"
-                    required />
+                  <label class="contact-form-label" data-fr="Nom" data-en="Name">Nom</label>
+                  <input class="contact-form-input" type="text" id="formName" placeholder="John Doe" required />
+                </div>
+                <div class="contact-form-row">
+                  <div class="contact-form-group">
+                    <label class="contact-form-label" data-fr="Email" data-en="Email">Email</label>
+                    <input class="contact-form-input" type="email" id="formEmail" placeholder="john.doe@email.com"
+                      required />
+                  </div>
+                  <div class="contact-form-group">
+                    <label class="contact-form-label" data-fr="Sujet" data-en="Subject">Sujet</label>
+                    <input class="contact-form-input" type="text" id="formSubject" placeholder="Alternance, stage..."
+                      required />
+                  </div>
                 </div>
                 <div class="contact-form-group">
-                  <label class="contact-form-label" data-fr="Sujet" data-en="Subject">Sujet</label>
-                  <input class="contact-form-input" type="text" id="formSubject" placeholder="Alternance, stage..."
-                    required />
+                  <label class="contact-form-label" data-fr="Message" data-en="Message">Message</label>
+                  <textarea class="contact-form-input contact-form-textarea" id="formMessage"
+                    placeholder="Votre message..." required></textarea>
                 </div>
-              </div>
-              <div class="contact-form-group">
-                <label class="contact-form-label" data-fr="Message" data-en="Message">Message</label>
-                <textarea class="contact-form-input contact-form-textarea" id="formMessage"
-                  placeholder="Votre message..." required></textarea>
-              </div>
-              <input type="text" id="honeypot" style="display:none" tabindex="-1" autocomplete="off" />
-              <button class="contact-form-btn" type="submit" id="formSubmit">
-                <span class="contact-form-btn-text" data-fr="Envoyer" data-en="Send">Envoyer</span>
-                <span class="contact-form-btn-arrow">↗</span>
-              </button>
-              <p class="contact-form-status" id="formStatus"></p>
-            </form>
-          </div>
+                <input type="text" id="honeypot" style="display:none" tabindex="-1" autocomplete="off" />
+                <div class="contact-form-actions">
+                  <button class="contact-form-btn" type="submit" id="formSubmit">
+                    <span class="contact-form-btn-text" data-fr="Envoyer" data-en="Send">Envoyer</span>
+                    <span class="contact-form-btn-arrow">↗</span>
+                  </button>
+                  <button id="cancelBtn" type="button">Fermer</button>
+                </div>
+                <p class="contact-form-status" id="formStatus"></p>
+              </form>
+            </div>
+          </dialog>
 
         </div>
         <p class="contact-copy">© 2025 Clément Humez</p>
