@@ -489,6 +489,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 { text: "Python", cls: "green" },
                 { text: "HTML/CSS", cls: "green" },
                 { text: "Tailwind", cls: "green" },
+                { text: "WordPress", cls: "green" },
                 { text: "JavaScript", cls: "green" },
                 { text: "React", cls: "green" },
                 { text: "Java", cls: "green" },
