@@ -419,7 +419,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // ---- TITRE ONGLET — FLICKER QUAND INACTIF (feature 6) ----
 
     var originalTitle = document.title;
-    var altTitle = "\uD83D\uDCBC Ouvert aux offres — Clément Humez";
+    var altTitle = "\uD83D\uDCBC Fermé aux offres — Clément Humez";
     var titleInterval = null;
     var titleToggle = false;
 
